@@ -1,0 +1,7 @@
+[tool.black]
+line-length = 80
+[tool.poetry]
+name = "bakend"
+version = "0.2.0"
+description = "Maybell backend"
+authors = ["balaji@bramkas.com"]

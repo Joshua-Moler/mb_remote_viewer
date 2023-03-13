@@ -1,0 +1,70 @@
+version: 1
+description: Action performed based on the rules defined below
+
+statuses:
+  - inactive
+  - idle
+
+pump_down:
+  description: "Pumping down"
+  parallel:
+    fn: pressure_check
+    formula: |
+      > 3
+    onfail: True
+  actions:
+    if:
+      fn: state_check
+      arg: idle
+      onfail: True
+    close_valve:
+      fn: close_valve
+    open_valve15:
+      fn: open_valve
+      arg: 15
+      parallel: start
+      onfail: False //default retries = 3
+    open_valve18:
+      fn: open_valve
+      arg: 18
+    start_pump1:
+      fn: start_pump
+      arg: None
+    start_turbo1:
+      fn: start_turbo
+      arg: None
+      parallel: end
+    state_change:
+      fn: state_change
+      arg: inactive
+  
+leak_check:
+
+
+cool_down:
+  description: "Cooling"
+  parallel:
+    fn: pressure_check
+    formula: |
+      > 3
+    onfail: True
+  actions:
+    if:
+      fn: state_check
+      arg: inactive
+    close_valve:
+      fn: close_valve
+      parallel: start
+    open_valve7:
+      fn: open_valve
+      arg: 7
+      onfail: True
+    open_valve9:
+      fn: open_valve
+      arg: 9
+      parallel: end
+      onfail: True
+
+
+
+  

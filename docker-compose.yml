@@ -1,0 +1,78 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+
+  rethinkdb:
+    image: rethinkdb:latest
+    container_name: rethinkdb
+    restart: always
+    ports:
+      - 8015:8080
+      - 28015:28015
+      - 29015:29015
+    environment:
+      - APP_NAME=maybelldb
+      - APP_USER=admin
+    command:
+      - /bin/bash
+      - -c
+      - |
+        rethinkdb create --initial-password uQ8E1wVTzG8SOk3
+        rethinkdb --bind all
+    volumes:
+      - ./rethinkdb_data:/data
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+  postgres:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db-data:/var/lib/postgresql/data:cached
+
+  controller_backend:
+    build:
+      context: controller_backend
+      dockerfile: Dockerfile
+    command: python3 app/main.py
+    tty: true
+    volumes:
+      - ./controller_backend:/app/:cached
+      - ./.docker/.ipython:/root/.ipython:cached
+      - /dev/bus/usb:/dev/bus/usb
+    privileged: true
+    environment:
+      PYTHONPATH: .
+      DATABASE_URL: 'postgresql://postgres:password@postgres:5432/postgres'
+      REDIS_URL: 'redis://redis:6379/1'
+      BROKER_URL: 'redis://redis:6379/0'
+      RETHINK_URL: 'rethinkdb://admin:uQ8E1wVTzG8SOk3@rethinkdb:28015/maybell?timeout=30'
+      RDB_HOST: rethinkdb
+      RDB_PORT: 29015
+      RDB_DB: maybell
+    ports:
+      - 8888:8888
+    depends_on:
+      - "postgres"
+      - "redis"
+      - "rethinkdb"
