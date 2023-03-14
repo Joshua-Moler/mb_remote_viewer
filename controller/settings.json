@@ -1,0 +1,32 @@
+{
+    "Devices": {
+        "Valves": {
+            "serial_number": "7&24694D06&0&4",
+            "pid": 62,
+            "vid": 9025
+        },
+        "Pressures": {
+            "serial_number": "AB0LSIIBA",
+            "pid": 24577,
+            "vid": 1027
+        },
+        "PM1": {
+            "serial_number": "0001A0000000",
+            "pid": 3000,
+            "vid": 9705
+        },
+        "PM2": {
+            "serial_number": "_",
+            "pid": 0,
+            "vid": 0
+        }
+    },
+    "Sensors": {
+        "PRP": 1,
+        "RGP": 2,
+        "CFP": 3,
+        "STP": 4,
+        "ICP": 5,
+        "MXP": "A"
+    }
+}
