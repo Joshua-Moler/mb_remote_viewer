@@ -20,15 +20,15 @@ export default class Plot extends Component {
 
         return (
             <div style={{
-                "backgroundImage": `url('http://98.43.65.223:8000/Plot/${this.state.param}')`,
+                "backgroundImage": `url('../test.png')`,
+                // "backgroundImage": `url('http://98.43.65.223:8000/Plot/${this.state.param}')`,
                 "backgroundSize": 'contain',
                 "preserveAspectRatio": "none",
                 "imageRendering": "crisp-edges",
                 "backgroundRepeat": "no-repeat",
-                "height": "100%",
-                "width": "100%",
+                "height": "5%",
+                "width": "5%",
                 "backgroundPosition": "center",
-
             }}>
 
             </div>

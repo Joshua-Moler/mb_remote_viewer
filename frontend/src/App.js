@@ -6,7 +6,7 @@ import Login from './routes/Login';
 import Preferences from './routes/Preferences'
 import useToken from './useToken'
 import Logs from './routes/Logs'
-import Account from './routes/Account'
+import Control from './routes/Control'
 
 function App() {
   const { token, setToken } = useToken();
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home logout={logout} />} />
           <Route path="/Logs" element={<Logs logout={logout} />} />
-          <Route path="/Account" element={<Account logout={logout} />} />
+          <Route path="/Control" element={<Control logout={logout} />} />
         </Routes>
       </BrowserRouter>
     </div>

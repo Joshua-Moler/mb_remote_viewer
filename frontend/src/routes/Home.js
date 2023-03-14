@@ -25,8 +25,8 @@ function Home(props) {
                     Learn React
                 </a> */}
             </div>
-            <CardHolder />
-            <Footer logout={props.logout} active="Home" />
+            <CardHolder embedded={false} />
+            <Footer logout={props.logout} active="Home" embedded={false} />
             {/* <div className='testing' /> */}
 
         </div >

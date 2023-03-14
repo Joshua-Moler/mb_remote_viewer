@@ -42,6 +42,8 @@
   width: 100vw;
   bottom: 0;
   z-index: 3;
+  transition: width 0.5s;
+
 }
 
 .App-link {
@@ -63,7 +65,7 @@
 .cardholder {
   background: linear-gradient(rgba(255, 255, 255, 1) 0%, rgba(251, 251, 251, 0.1) 100%), linear-gradient(90deg, #84d2ff, #8d5acd);
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   display: -webkit-flex;
   justify-content: stretch;
@@ -71,5 +73,9 @@
   align-items: center;
   -webkit-align-items: center;
   flex-direction: column;
-  -webkit-flex-direction: column
+  -webkit-flex-direction: column;
+  transition: width 0.5s;
+  position: absolute;
+  top: 0;
+  left: 0
 }
