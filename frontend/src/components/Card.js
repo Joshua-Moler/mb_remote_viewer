@@ -27,10 +27,10 @@ export default class Card extends Component {
                 }}
 
                 className={`fade`}>
-                <div style={{ "marginLeft": "10vw", "fontWeight": "bold" }}>
+                <div style={{ "marginLeft": "10%", "fontWeight": "bold" }}>
                     {`${this.props.value} ${this.props.units ? this.props.units : ""}`}
                 </div>
-                <div style={{ "fontSize": "small", "marginLeft": "10vw" }}>
+                <div style={{ "fontSize": "small", "marginLeft": "10%" }}>
                     {`${this.props.text}`}
                 </div>
             </div >

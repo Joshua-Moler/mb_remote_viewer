@@ -102,7 +102,7 @@ export default class CardHolder extends Component {
             visibility: [...this.underCardVisibility],
             values: this.values,
             active: this.activeLabels,
-            underLabels: this.underCardLabels
+            underLabels: this.underCardLabels,
         }
 
         //this.gradientList = generateGradient([23, 28, 66, 0], [23, 28, 66, 1], this.cardNum)
@@ -208,10 +208,9 @@ export default class CardHolder extends Component {
 
 
     render() {
-        const fade = this.state.fade
 
         return (
-            <div className='cardholder'>
+            <div className={`cardholder${this.props.embedded ? " embedded" : ""}`}>
                 {/* {this.open ? this.underCardHolders[this.activeUnderCardHolder] : ''} */}
                 {[...Array(this.underCardNums.length).keys()].map(
                     ii =>
@@ -228,6 +227,7 @@ export default class CardHolder extends Component {
                             values={this.getUnderCardValues(ii)}
                             background={this.underGradients[ii]}
                             units={this.units[ii]}
+                            embedded={this.props.embedded}
 
 
                         />

@@ -1,12 +1,10 @@
-import logo from '../logo.svg';
-import { Link } from 'react-router-dom';
-import '../App.css';
 import '../style.css'
 import Footer from '../components/Footer';
 import CardHolder from '../components/CardHolder';
 import { useEffect } from 'react'
 
-function Home(props) {
+
+function Control(props) {
 
     useEffect(() => { props.setPage() })
 
@@ -18,4 +16,4 @@ function Home(props) {
     );
 }
 
-export default Home;
+export default Control;

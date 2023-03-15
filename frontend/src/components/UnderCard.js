@@ -26,10 +26,10 @@ export default class UnderCard extends Component {
 
 
                 className={`undercard`}>
-                <div style={{ "marginLeft": "5vw", "paddingTop": '0.5vh', 'fontWeight': 'bold' }}>
+                <div style={{ "marginLeft": "5%", "paddingTop": '0.5%', 'fontWeight': 'bold' }}>
                     {`${this.props.value} ${this.props.units}`}
                 </div>
-                <div style={{ "marginLeft": "5vw", "fontSize": "x-small" }}>
+                <div style={{ "marginLeft": "5%", "fontSize": "x-small" }}>
                     {`${this.props.text}`}
                 </div>
             </div>

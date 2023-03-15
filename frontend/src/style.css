@@ -9,7 +9,7 @@
     border-left: 0px;
     border-bottom: 0px;
     flex: 1;
-    width: 100vw;
+    width: 100%;
     margin-top: 0vh;
     transition: margin-top 0.5s;
     z-index: 2;
@@ -37,7 +37,7 @@
     border-left: 0px;
     border-bottom: 0px;
     flex: 1;
-    width: 100vw;
+    width: 100%;
     margin-top: 0vh;
     transition: margin-top 0.5s;
     z-index: 0;
@@ -57,13 +57,19 @@
     position: absolute;
     top: 10vh;
     height: 50vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
     visibility: visible;
+    transition: width 0.25s;
 
 
 
+}
+
+.embedded {
+    width: 25%
 }
 
 .fade.moving {
