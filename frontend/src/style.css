@@ -62,14 +62,14 @@
     justify-content: center;
     flex-direction: column;
     visibility: visible;
-    transition: width 0.5s;
+    transition: width 0.25s;
 
 
 
 }
 
 .embedded {
-    width: 25%;
+    width: 25%
 }
 
 .fade.moving {

@@ -4,29 +4,14 @@ import '../App.css';
 import '../style.css'
 import Footer from '../components/Footer';
 import CardHolder from '../components/CardHolder';
+import { useEffect } from 'react'
 
 function Home(props) {
 
-
+    useEffect(() => { props.setPage() })
 
     return (
-        <div className="App">
-            <div className="App-header">
-                {/* <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a> */}
-            </div>
-            <CardHolder embedded={false} />
-            <Footer logout={props.logout} active="Home" embedded={false} />
+        <div className="LogsScreen">
             {/* <div className='testing' /> */}
 
         </div >

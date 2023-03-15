@@ -42,7 +42,7 @@
   width: 100vw;
   bottom: 0;
   z-index: 3;
-  transition: width 0.5s;
+  transition: width 0.3s;
 
 }
 
@@ -74,7 +74,7 @@
   -webkit-align-items: center;
   flex-direction: column;
   -webkit-flex-direction: column;
-  transition: width 0.5s;
+  transition: width 0.3s;
   position: absolute;
   top: 0;
   left: 0

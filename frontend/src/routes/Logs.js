@@ -4,11 +4,12 @@ import Footer from '../components/Footer';
 import React, { useState } from 'react';
 import Plot from '../components/Plot';
 import CardHolder from '../components/CardHolder';
+import { useEffect } from 'react'
 
 
 function Logs(props) {
 
-
+    useEffect(() => { props.setPage() })
 
     return (
         <div className="LogsScreen">
@@ -20,7 +21,6 @@ function Logs(props) {
                 "width": "100%",
             }}>
 
-                {/* <CardHolder embedded={true} /> */}
 
                 <div style={{
                     "width": "100%",
@@ -32,8 +32,6 @@ function Logs(props) {
 
                 </div>
             </div>
-            <Footer logout={props.logout} active="Logs" embedded={true} />
-            {/* <div className='testing' /> */}
 
         </div >
     );

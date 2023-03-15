@@ -14,7 +14,7 @@ export default class CardHolder extends Component {
     render() {
 
         return (
-            <div className={`undermain${this.props.embedded ? " embedded" : ""}`} style={{
+            <div className="undermain" style={{
                 "top": `${this.props.top}vh`,
                 "height": `${this.props.height}vh`
             }}>
