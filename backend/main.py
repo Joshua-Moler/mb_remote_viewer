@@ -105,7 +105,7 @@ async def values():
     try:
         data = requests.get(restADR+"All", auth=statusServerAuth).json()
     except:
-        pass
+        data = {}
 
     for dType in data:
         for value in JSON:

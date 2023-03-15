@@ -4,10 +4,10 @@ import Card from './Card.js'
 import UnderCardHolder from './UnderCardHolder'
 import serverParameters from '../data/serverParameters.json';
 
-const dataHost = serverParameters['Data_Host']
+const backendHost = serverParameters['Backend_Host']
 
 async function getValues() {
-    const values = fetch('http://98.43.65.223:8000/values', {
+    const values = fetch('http://http://localhost:8000/values', {
         method: 'GET'
     }).then(data => data.json())
         .then(json => { return json })
@@ -51,7 +51,7 @@ export default class CardHolder extends Component {
         ]
         this.units = [
             "",
-            "PSI",
+            "mBar",
             "K",
             "K",
             "SCFM"
@@ -116,7 +116,7 @@ export default class CardHolder extends Component {
     }
 
     updateValues = () => {
-        fetch(`${dataHost}/values`, {
+        fetch(`${backendHost}/values`, {
             method: 'GET'
         }).then(data => data.json())
             .then(json => {
