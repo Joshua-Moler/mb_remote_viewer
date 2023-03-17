@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.tasks import repeat_every
 from fastapi.responses import FileResponse
@@ -78,6 +78,43 @@ async def token():
     return {"token": 'test123'}
 
 
+@app.get("/status")
+async def status():
+    return {
+
+        "v1": False,
+        "v2": False,
+        "v3": False,
+        "v4": False,
+        "v5": False,
+        "v6": False,
+        "v7": False,
+        "v8": False,
+        "v9": False,
+        "v10": False,
+        "v11": False,
+        "v12": False,
+        "v13": False,
+        "v14": False,
+        "v15": False,
+        "v16": False,
+        "v17": False,
+        "v18": False,
+        "v19": True,
+        "v20": False,
+        "v21": False,
+        "v22": False,
+        "v23": False,
+        "v24": False,
+        "PM1": False,
+        "PM2": False,
+        "PM3": False,
+        "PM4": False,
+        "PM5": False
+
+    }
+
+
 @app.get("/values")
 async def values():
     DMAP = {
@@ -117,6 +154,13 @@ async def values():
                 JSON[value] = dataValue
 
     return JSON
+
+
+@app.post("/setstate")
+async def setState(request: Request):
+    body = await request.json()
+    print(body)
+    return body
 
 
 @app.on_event("startup")

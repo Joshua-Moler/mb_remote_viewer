@@ -132,11 +132,16 @@ export default class CardHolder extends Component {
     componentDidMount() {
         this.updateValues()
 
-        setInterval(
+        this.interval = setInterval(
             () => {
                 this.updateValues()
             }, 20000
         )
+
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
     }
 
     onChildClick = (e) => {

@@ -1,46 +1,13 @@
 function ValveBoard(props) {
-    var status = {
-
-        "v1": true,
-        "v2": true,
-        "v3": true,
-        "v4": true,
-        "v5": true,
-        "v6": true,
-        "v7": true,
-        "v8": true,
-        "v9": true,
-        "v10": true,
-        "v11": true,
-        "v12": true,
-        "v13": true,
-        "v14": true,
-        "v15": true,
-        "v16": true,
-        "v17": true,
-        "v18": true,
-        "v19": true,
-        "v20": true,
-        "v21": true,
-        "v22": true,
-        "v23": true,
-        "v24": true,
-        "PM1": true,
-        "PM2": true,
-        "PM3": true,
-        "PM4": true,
-        "PM5": true
-
-    }
 
     return (
-        <div style={{}}>
-            <svg width="100%" height="100%" viewBox="0 0 353.26209 325.01963" version="1.1" id="svg21212" xmlns="http://www.w3.org/2000/svg" xmlnssvg="http://www.w3.org/2000/svg">
+        <div style={{ pointerEvents: "none" }}>
+            <svg width="100%" height="100%" viewBox="0 0 353.26209 325.01963" version="1.1" id="svg21212" xmlns="http://www.w3.org/2000/svg" xmlnssvg="http://www.w3.org/2000/svg" pointerEvents="none">
                 <defs id="defs21209" />
                 <g id="layer1" transform="translate(142.7621,7.2695723)">
                     <g id="g33102" transform="translate(294.99958,75.00003)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214" />
-                        <path style={{ opacity: '0.99', fill: status['v7'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216" />
+                        <path style={{ opacity: '0.99', fill: props.status['v7'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220" />
                         <path id="path24222" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -48,15 +15,15 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-5" transform="translate(294.99958,2e-5)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-7" />
-                        <path style={{ opacity: '0.99', fill: status['v3'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-5" />
+                        <path style={{ opacity: '0.99', fill: props.status['v3'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-5" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-1" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-4" />
                         <path id="path24222-0" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
-                        <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="-169.66173" y="196.64192" id="text30964-7"><tspan id="tspan30962-6" style={{ strokeWidth: 0, fill: '#ffffff', fillOpacity: 1 }} x="-169.66173" y="196.64192">V3</tspan></text>
+                        <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="-169.66173" y="196.64192" id="text30964-7"><tspan id="tspan30962-6" style={{ strokeWidth: 0, fill: '#ffffff', fillOpacity: 1 }} x="-169.66173" y="196.64192">V23</tspan></text>
                     </g>
                     <g id="g33102-5-0" transform="translate(294.99958,-29.99998)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-7-2" />
-                        <path style={{ opacity: '0.99', fill: status['v22'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-5-7" />
+                        <path style={{ opacity: '0.99', fill: props.status['v22'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-5-7" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-1-3" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-4-1" />
                         <path id="path24222-0-7" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -64,7 +31,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-8" transform="translate(234.99958,75.00003)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-6" />
-                        <path style={{ opacity: '0.99', fill: status['v9'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1" />
+                        <path style={{ opacity: '0.99', fill: props.status['v9'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-8" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-5" />
                         <path id="path24222-3" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -72,7 +39,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-8-26" transform="translate(99.999578,75.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-6-48" />
-                        <path style={{ opacity: '0.99', fill: status['v14'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-9" />
+                        <path style={{ opacity: '0.99', fill: "#000000"/*props.status['PM3'] ? '#00bbff' : '#ff00aa'*/, fillOpacity: 0, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-9" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-8-6" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-5-0" />
                         <path id="path24222-3-9" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -80,7 +47,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-8-9" transform="translate(99.999578,60.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-6-2" />
-                        <path style={{ opacity: '0.99', fill: status['v19'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-7" />
+                        <path style={{ opacity: '0.99', fill: props.status['v19'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-7" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-8-1" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-5-1" />
                         <path id="path24222-3-1" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -88,7 +55,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-8-26-2" transform="translate(249.99958,-119.99996)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-6-48-8" />
-                        <path style={{ opacity: '0.99', fill: status['v5'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-9-1" />
+                        <path style={{ opacity: '0.99', fill: props.status['v5'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-9-1" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-8-6-9" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-5-0-3" />
                         <path id="path24222-3-9-0" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -96,7 +63,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-8-9-9" transform="translate(249.99958,-134.99995)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-6-2-9" />
-                        <path style={{ opacity: '0.99', fill: status['v6'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-7-6" />
+                        <path style={{ opacity: '0.99', fill: props.status['v6'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-7-6" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-8-1-7" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-5-1-2" />
                         <path id="path24222-3-1-1" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -104,7 +71,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-8-2" transform="translate(129.99958,60.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-6-4" />
-                        <path style={{ opacity: '0.99', fill: status['v11'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-8" />
+                        <path style={{ opacity: '0.99', fill: props.status['v11'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-1-8" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-8-3" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-5-3" />
                         <path id="path24222-3-6" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -112,7 +79,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33102-2" transform="translate(294.99958,105.00004)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path24214-5" />
-                        <path style={{ opacity: '0.99', fill: status['v18'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-0" />
+                        <path style={{ opacity: '0.99', fill: props.status['v18'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path24216-0" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path24218-4" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path24220-3" />
                         <path id="path24222-8" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -120,7 +87,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-4" transform="translate(69.999578,60.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-9" />
-                        <path style={{ opacity: '0.99', fill: status['v15'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-2" />
+                        <path style={{ opacity: '0.99', fill: props.status['v15'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-2" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-8" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-49" />
                         <path id="path24234-6" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -128,7 +95,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-4-2" transform="translate(39.99958,90.00003)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-9-1" />
-                        <path style={{ opacity: '0.99', fill: status['v8'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-2-2" />
+                        <path style={{ opacity: '0.99', fill: "#000000"/*props.status['PM3'] ? '#00bbff' : '#ff00aa'*/, fillOpacity: 0, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-2-2" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-8-0" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-49-8" />
                         <path id="path24234-6-4" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -136,7 +103,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-9" transform="translate(264.99958,75.00004)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-5" />
-                        <path style={{ opacity: '0.99', fill: status['v10'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-5" />
+                        <path style={{ opacity: '0.99', fill: props.status['v10'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-5" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-6" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-4" />
                         <path id="path24234-4" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -173,7 +140,7 @@ function ValveBoard(props) {
                         <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="155.18076" y="286.64194" id="text30792-9"><tspan id="tspan30790-5" style={{ strokeWidth: 0, fill: '#ffffff', fillOpacity: 1 }} x="155.18076" y="286.64194">MV3</tspan></text>
                     </g>
                     <g id="g33031-9" transform="rotate(-90,-14.749882,170.25011)">
-                        <path id="path15435-7" style={{ opacity: '0.99', fill: status['PM2'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m -41.999756,160.24999 a 7.2499716,7.2500004 0 0 1 7.249969,-7.25 7.2499716,7.2500004 0 0 1 7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249969,-7.25 z" />
+                        <path id="path15435-7" style={{ opacity: '0.99', fill: props.status['PM2'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m -41.999756,160.24999 a 7.2499716,7.2500004 0 0 1 7.249969,-7.25 7.2499716,7.2500004 0 0 1 7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249969,-7.25 z" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -34.749784,145.24999 v 7.75" id="path7193-6-7" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -34.749784,167.49999 v 7.75" id="path7193-6-6-6" />
                         <path style={{ opacity: '0.99', fill: 'none', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -30.906662,166.39758 2.5589,-9.54998" id="path15442-7" />
@@ -182,7 +149,7 @@ function ValveBoard(props) {
                         <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="160.2686" y="46.009586" id="text32247-3" transform="rotate(90)"><tspan id="tspan32245-9" style={{ strokeWidth: 0, fill: '#ffffff', fillOpacity: 1 }} x="160.2686" y="46.009586">PM2</tspan></text>
                     </g>
                     <g id="g33031-9-6" transform="rotate(-90,0.250121,185.25012)">
-                        <path id="path15435-7-5" style={{ opacity: '0.99', fill: status['PM1'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m -41.999756,160.24999 a 7.2499716,7.2500004 0 0 1 7.249969,-7.25 7.2499716,7.2500004 0 0 1 7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249969,-7.25 z" />
+                        <path id="path15435-7-5" style={{ opacity: '0.99', fill: props.status['PM1'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m -41.999756,160.24999 a 7.2499716,7.2500004 0 0 1 7.249969,-7.25 7.2499716,7.2500004 0 0 1 7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249972,7.25 7.2499716,7.2500004 0 0 1 -7.249969,-7.25 z" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -34.749784,145.24999 v 7.75" id="path7193-6-7-3" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -34.749784,167.49999 v 7.75" id="path7193-6-6-6-8" />
                         <path style={{ opacity: '0.99', fill: 'none', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -30.906662,166.39758 2.5589,-9.54998" id="path15442-7-5" />
@@ -191,7 +158,7 @@ function ValveBoard(props) {
                         <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="160.2686" y="46.009586" id="text32247-3-1" transform="rotate(90)"><tspan id="tspan32245-9-8" style={{ strokeWidth: 0, fill: '#ffffff', fillOpacity: 1 }} x="160.2686" y="46.009586">PM1</tspan></text>
                     </g>
                     <g id="g32930-3" transform="translate(-20.070517,15.04221)">
-                        <path id="path19350-3" style={{ opacity: '0.99', fill: status['PM4'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m 70.250211,242.49997 a 7.2500004,7.2499717 0 0 1 -7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.25,7.24997 7.2500004,7.2499717 0 0 1 -7.25,7.24997 z" />
+                        <path id="path19350-3" style={{ opacity: '0.99', fill: "#000000"/*props.status['PM3'] ? '#00bbff' : '#ff00aa'*/, fillOpacity: 0, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m 70.250211,242.49997 a 7.2500004,7.2499717 0 0 1 -7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.25,7.24997 7.2500004,7.2499717 0 0 1 -7.25,7.24997 z" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 55.250211,235.25 h 7.750001" id="path19352-9" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 77.500211,235.25 h 7.750001" id="path19354-1" />
                         <path style={{ opacity: '0.99', fill: 'none', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 76.397796,231.40688 -9.549976,-2.5589" id="path19356-5" />
@@ -199,7 +166,7 @@ function ValveBoard(props) {
                         <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#fafafa', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="70.180962" y="246.89201" id="text32251-6"><tspan id="tspan32249-7" style={{ strokeWidth: 0, fill: '#fafafa', fillOpacity: 1 }} x="70.180962" y="246.89201">PM4</tspan></text>
                     </g>
                     <g id="g32930-4" transform="translate(-20.070517,-14.95779)">
-                        <path id="path19350-2" style={{ opacity: '0.99', fill: status['PM3'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m 70.250211,242.49997 a 7.2500004,7.2499717 0 0 1 -7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.25,7.24997 7.2500004,7.2499717 0 0 1 -7.25,7.24997 z" />
+                        <path id="path19350-2" style={{ opacity: '0.99', fill: "#000000"/*props.status['PM3'] ? '#00bbff' : '#ff00aa'*/, fillOpacity: 0, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m 70.250211,242.49997 a 7.2500004,7.2499717 0 0 1 -7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.249999,-7.24997 7.2500004,7.2499717 0 0 1 7.25,7.24997 7.2500004,7.2499717 0 0 1 -7.25,7.24997 z" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 55.250211,235.25 h 7.750001" id="path19352-2" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 77.500211,235.25 h 7.750001" id="path19354-8" />
                         <path style={{ opacity: '0.99', fill: 'none', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 76.397796,231.40688 -9.549976,-2.5589" id="path19356-3" />
@@ -207,7 +174,7 @@ function ValveBoard(props) {
                         <text xmlSpace="preserve" style={{ fontSize: '4.23333px', fontFamily: 'sans-serif', InkscapeFontSpecification: 'sans-serif', textAlign: 'center', textAnchor: 'middle', opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} x="70.180962" y="246.89201" id="text32251-4"><tspan id="tspan32249-9" style={{ strokeWidth: 0, fill: '#ffffff', fillOpacity: 1 }} x="70.180962" y="246.89201">PM3</tspan></text>
                     </g>
                     <g id="g32800-8" transform="translate(10)">
-                        <path id="path26023-1" style={{ opacity: '0.99', fill: status['PM5'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m 137.49997,175.24999 a 7.2499717,7.2500004 0 0 1 -7.24997,7.25 7.2499717,7.2500004 0 0 1 -7.24997,-7.25 7.2499717,7.2500004 0 0 1 7.24997,-7.25 7.2499717,7.2500004 0 0 1 7.24997,7.25 z" />
+                        <path id="path26023-1" style={{ opacity: '0.99', fill: "#000000"/*props.status['PM3'] ? '#00bbff' : '#ff00aa'*/, fillOpacity: 0, stroke: '#ffffff', strokeWidth: '0.499999', strokeOpacity: 1 }} d="m 137.49997,175.24999 a 7.2499717,7.2500004 0 0 1 -7.24997,7.25 7.2499717,7.2500004 0 0 1 -7.24997,-7.25 7.2499717,7.2500004 0 0 1 7.24997,-7.25 7.2499717,7.2500004 0 0 1 7.24997,7.25 z" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeDashoffset: 0, strokeOpacity: 1 }} d="m 130.25,190.24999 v -7.75" id="path26025-0" />
                         <path style={{ display: 'inline', opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeDashoffset: 0, strokeOpacity: 1 }} d="m 130.25,167.99999 v -7.75" id="path26027-4" />
                         <path style={{ opacity: '0.99', fill: 'none', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 126.40688,169.1024 -2.5589,9.54998" id="path26029-6" />
@@ -313,7 +280,7 @@ function ValveBoard(props) {
                     <path style={{ opacity: '0.99', fill: '#000000', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 180.25,295.25002 h -10" id="path37398" />
                     <g id="g33112-0" transform="translate(69.999578,30.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7" />
-                        <path style={{ opacity: '0.99', fill: status['v17'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56" />
+                        <path style={{ opacity: '0.99', fill: props.status['v17'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3" />
                         <path id="path24234-66" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -321,7 +288,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-0-2" transform="translate(99.999578,30.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7-5" />
-                        <path style={{ opacity: '0.99', fill: status['v12'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0" />
+                        <path style={{ opacity: '0.99', fill: props.status['v12'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5-5" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3-7" />
                         <path id="path24234-66-8" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -329,7 +296,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-0-2-9" transform="translate(264.99958,2e-5)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7-5-8" />
-                        <path style={{ opacity: '0.99', fill: status['v24'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3" />
+                        <path style={{ opacity: '0.99', fill: props.status['v24'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5-5-2" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3-7-3" />
                         <path id="path24234-66-8-8" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -337,7 +304,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-0-2-9-2" transform="translate(249.99958,-89.99996)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7-5-8-5" />
-                        <path style={{ opacity: '0.99', fill: status['v3'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-4" />
+                        <path style={{ opacity: '0.99', fill: props.status['v3'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-4" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5-5-2-7" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3-7-3-5" />
                         <path id="path24234-66-8-8-0" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -345,7 +312,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-0-2-9-2-8" transform="translate(249.99958,-149.99995)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7-5-8-5-7" />
-                        <path style={{ opacity: '0.99', fill: status['v1'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-4-7" />
+                        <path style={{ opacity: '0.99', fill: props.status['v1'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-4-7" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5-5-2-7-3" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3-7-3-5-8" />
                         <path id="path24234-66-8-8-0-5" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -353,7 +320,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-0-2-9-7" transform="translate(279.99958,-89.999958)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7-5-8-3" />
-                        <path style={{ opacity: '0.99', fill: status['v4'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-7" />
+                        <path style={{ opacity: '0.99', fill: props.status['v4'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-7" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5-5-2-2" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3-7-3-1" />
                         <path id="path24234-66-8-8-1" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -361,7 +328,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g33112-0-2-9-7-5" transform="translate(279.99958,-149.99996)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,160.24998 v 10" id="path24226-7-5-8-3-8" />
-                        <path style={{ opacity: '0.99', fill: status['v2'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-7-4" />
+                        <path style={{ opacity: '0.99', fill: props.status['v2'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,170.24998 h 2.46894 l -4.93789,10 h 4.93789 l -4.93789,-10 z" id="path24228-56-0-3-7-4" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74958,180.24998 v 10" id="path24230-5-5-2-2-9" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -154.74959,175.24998 h 2.5" id="path24232-3-7-3-1-6" />
                         <path id="path24234-66-8-8-1-8" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -152.24959,174.17185 c 0.4943,0 0.895,0.4827 0.895,1.07813 0,0.59543 -0.4007,1.07812 -0.895,1.07812 z" />
@@ -377,7 +344,7 @@ function ValveBoard(props) {
                     </g>
                     <g id="g4988" transform="translate(99.999578,30.000033)">
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -184.74958,190.24998 h 10" id="path4974" />
-                        <path style={{ opacity: '0.99', fill: status['v16'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path4976" />
+                        <path style={{ opacity: '0.99', fill: props.status['v16'] ? '#00bbff' : '#ff00aa', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -174.74958,190.24998 v -2.46894 l 10,4.93789 v -4.93789 l -10,4.93789 z" id="path4976" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -164.74958,190.24998 h 10" id="path4978" />
                         <path style={{ opacity: '0.99', fill: 'none', fillOpacity: 1, stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -169.74958,190.24999 v -2.5" id="path4980" />
                         <path id="path4982" style={{ opacity: '0.99', fill: '#ffffff', stroke: '#ffffff', strokeWidth: '0.341613', strokeOpacity: 1, fillOpacity: 1 }} d="m -170.82771,187.74999 c 0,-0.4943 0.4827,-0.895 1.07813,-0.895 0.59543,0 1.07812,0.4007 1.07812,0.895 z" />
@@ -401,8 +368,8 @@ function ValveBoard(props) {
                     <path style={{ opacity: '0.99', fill: '#000000', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 125.25,55.250025 v -15" id="path25203-8-6-8" />
                     <path style={{ opacity: '0.99', fill: '#000000', stroke: '#ffffff', strokeWidth: '0.499999', strokeDasharray: 'none', strokeOpacity: 1 }} d="m 65.250001,70.250025 v -15" id="path25203-8-6-4" />
                     <path style={{ opacity: '0.99', fill: '#000000', stroke: '#ffffff', strokeWidth: '0.5', strokeDasharray: 'none', strokeOpacity: 1 }} d="m -114.75,70.250025 v -7.5" id="path25203-8-6-4-9" />
-                    <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-4" cx="95.25" cy="265.25" r="1.5" />
-                    <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-5" cx="110.25" cy="280.25" r="1.5" />
+                    {/* <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-4" cx="95.25" cy="265.25" r="1.5" /> */}
+                    {/* <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-5" cx="110.25" cy="280.25" r="1.5" /> */}
                     <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-53" cx="110.25" cy="265.25" r="1.5" />
                     <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-85" cx="110.24999" cy="295.25003" r="1.5" />
                     <circle style={{ opacity: '0.99', fill: '#ffffff', stroke: '#000000', strokeWidth: 0, strokeDasharray: 'none', fillOpacity: 1 }} id="circle36819-57" cx="110.25" cy="190.25" r="1.5" />
