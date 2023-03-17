@@ -100,7 +100,7 @@ async def status():
         "v16": False,
         "v17": False,
         "v18": False,
-        "v19": True,
+        "v19": False,
         "v20": False,
         "v21": False,
         "v22": False,

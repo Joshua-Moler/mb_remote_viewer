@@ -6,15 +6,6 @@ import serverParameters from '../data/serverParameters.json';
 
 const backendHost = serverParameters['Backend_Host']
 
-async function getValues() {
-    const values = fetch('http://http://localhost:8000/values', {
-        method: 'GET'
-    }).then(data => data.json())
-        .then(json => { return json })
-
-
-}
-
 function generateGradient(startColor, endColor, chunks) {
 
     var gradientList = []
@@ -31,6 +22,15 @@ function generateGradient(startColor, endColor, chunks) {
     return gradientList
 }
 
+class CardData {
+    constructor(label = "", unit = "", underCardLabels = [], activeLabel = []) {
+        this.label = label
+        this.unit = unit
+        this.underCardLabels = underCardLabels
+        this.activeLabel = activeLabel
+    }
+}
+
 
 export default class CardHolder extends Component {
     constructor(props) {
@@ -40,6 +40,23 @@ export default class CardHolder extends Component {
         this.state = {}
         this.open = false
         this.fadesList = Array(this.cardNum).fill(false);
+        const cardLabels = [
+            "",
+            "CURRENT TEMPERATURE - ",
+            "CURRENT PRESSURE - ",
+            "TARGET TEMPERATURE ",
+            "CIRCULATION RATE ",
+            "",
+            ""
+        ]
+        this.cards = [...Array(this.cardNum).keys()].map((ii) => new CardData(cardLabels[ii]))
+        this.cards[1].unit = "K"
+        this.cards[2].unit = 'mBar'
+        this.cards[3].unit = 'K'
+        this.cards[4].unit = 'L/m'
+
+
+        console.log(this.cards)
         this.cardLabels = [
             "",
             "CURRENT PRESSURE - ",
@@ -240,14 +257,14 @@ export default class CardHolder extends Component {
                 {[...Array(this.cardNum).keys()].map(ii =>
                     <Card
                         background={`${this.gradientList[ii]},linear-gradient(90deg, #1f3863, #111e34)`}
-                        text={`${this.cardLabels[ii]}${this.state.active[ii] ? this.state.active[ii] : ""}`}
+                        text={`${this.cards[ii].label}${this.state.active[ii] ? this.state.active[ii] : ""}`}
                         key={ii}
                         onClick={this.onChildClick}
                         id={ii}
                         fade={this.state.fades[ii]}
                         padding={this.totalHeight * this.underCardNums[ii] / (this.cardNum + this.underCardNums[ii])}
                         value={this.state.active[ii] ? this.state.values[this.state.active[ii]] : ""}
-                        units={this.units[ii]}
+                        units={this.cards[ii].unit}
                     />
                 )}
             </div>
