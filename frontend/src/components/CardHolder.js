@@ -40,39 +40,23 @@ export default class CardHolder extends Component {
         this.state = {}
         this.open = false
         this.fadesList = Array(this.cardNum).fill(false);
-        const cardLabels = [
-            "",
-            "CURRENT TEMPERATURE - ",
-            "CURRENT PRESSURE - ",
-            "TARGET TEMPERATURE ",
-            "CIRCULATION RATE ",
-            "",
-            ""
-        ]
-        this.cards = [...Array(this.cardNum).keys()].map((ii) => new CardData(cardLabels[ii]))
-        this.cards[1].unit = "K"
-        this.cards[2].unit = 'mBar'
-        this.cards[3].unit = 'K'
-        this.cards[4].unit = 'L/m'
+        const cardLabels = {
+            1: "CURRENT TEMPERATURE - ",
+            2: "CURRENT PRESSURE - ",
+            3: "TARGET TEMPERATURE ",
+            4: "CIRCULATION RATE ",
+        }
+        const units = {
+            1: "K", 2: "mBar", 3: "K", 4: "L/m"
+        }
 
+        this.cards = [...Array(this.cardNum).keys()].map((ii) => new CardData())
+        for (let card in this.cards.keys()) {
+            this.cards[card].label = cardLabels[cards]
+            this.cards[card].unit = units[cards]
 
+        }
         console.log(this.cards)
-        this.cardLabels = [
-            "",
-            "CURRENT PRESSURE - ",
-            "CURRENT TEMPERATURE - ",
-            "TARGET TEMPERATURE ",
-            "CIRCULATION RATE ",
-            "",
-            ""
-        ]
-        this.units = [
-            "",
-            "mBar",
-            "K",
-            "K",
-            "SCFM"
-        ]
         this.underCardNums = [0, 5, 5]
         this.underCardLabels = [
             [],
