@@ -143,17 +143,18 @@ async def values():
         data = requests.get(restADR+"All", auth=statusServerAuth).json()
     except:
         data = {}
+    returnData = {ii.upper() : data[ii] for ii in data}
 
-    for dType in data:
-        for value in JSON:
-            label = DMAP[value] if value in DMAP else value
-            if label in data[dType]:
-                dataValue = data[dType][label]
-                if dType == "Temperatures":
-                    dataValue = str(float('%.4g' % dataValue))
-                JSON[value] = dataValue
 
-    return JSON
+    if "STATUS" not in returnData: returnData["STATUS"] = {}
+    if "TEMPERATURES" not in returnData: returnData["TEMPERATURES"] = {}
+    if "PRESSURES" not in returnData: returnData["PRESSURES"] = {}
+    if "SETPOINT" not in returnData: returnData["SETPOINT"] = {}
+    if "FLOW" not in returnData: returnData["FLOW"] = {}
+
+
+    print(returnData)
+    return returnData
 
 
 @app.post("/setstate")

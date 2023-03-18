@@ -23,11 +23,16 @@ function generateGradient(startColor, endColor, chunks) {
 }
 
 class CardData {
-    constructor(label = "", unit = "", underCardLabels = [], activeLabel = []) {
+    constructor(label = "", unit = "", activeLabel = "", name = "") {
         this.label = label
         this.unit = unit
-        this.underCardLabels = underCardLabels
         this.activeLabel = activeLabel
+        this.name = name
+        this.underCardVisibility = false
+        this.underCardValues = {}
+        this.isActive = false
+        this.fade = false
+        this.underGradient = ""
     }
 }
 
@@ -37,9 +42,15 @@ export default class CardHolder extends Component {
         super(props);
         this.cardNum = 7
 
-        this.state = {}
         this.open = false
         this.fadesList = Array(this.cardNum).fill(false);
+        const cardNames = {
+            0: "STATUS",
+            1: "TEMPERATURES",
+            2: "PRESSURES",
+            3: "SETPOINT",
+            4: "FLOW"
+        }
         const cardLabels = {
             1: "CURRENT TEMPERATURE - ",
             2: "CURRENT PRESSURE - ",
@@ -50,13 +61,17 @@ export default class CardHolder extends Component {
             1: "K", 2: "mBar", 3: "K", 4: "L/m"
         }
 
-        this.cards = [...Array(this.cardNum).keys()].map((ii) => new CardData())
-        for (let card in this.cards.keys()) {
-            this.cards[card].label = cardLabels[cards]
-            this.cards[card].unit = units[cards]
+        this.cards = Object.fromEntries([...Array(this.cardNum).keys()].map((ii) => {
 
-        }
-        console.log(this.cards)
+            let card = new CardData()
+            if (cardLabels[ii]) card.label = cardLabels[ii]
+            if (units[ii]) card.unit = units[ii]
+            let name = cardNames[ii] ? cardNames[ii] : String(ii)
+            card.name = name
+            return [ii, card]
+
+        }))
+
         this.underCardNums = [0, 5, 5]
         this.underCardLabels = [
             [],
@@ -121,14 +136,41 @@ export default class CardHolder extends Component {
             method: 'GET'
         }).then(data => data.json())
             .then(json => {
-                //console.log(json)
+
+                for (const card in this.cards) {
+                    console.log(this.cards[card])
+                    if (json[this.cards[card].name]) {
+
+                        this.cards[card].underCardValues = JSON.parse(JSON.stringify(json[this.cards[card].name]))
+
+                        const dataLength = Object.keys(json[this.cards[card].name]).length
+
+                        this.cards[card].activeLabel = dataLength ? Object.keys(json[this.cards[card].name])[dataLength - 1] : ""
+
+                        this.cards[card].underGradient = [...Array(Object.keys(this.cards[card].underCardValues).length).keys()].map(
+                            (ii) =>
+                                Object.keys(this.cards[card].underCardValues).length ? generateGradient([255, 255, 255, 0.0], [255, 255, 255, 0.00], Object.keys(this.cards[card].underCardValues).length) : ""
+                        )
+
+
+                    }
+
+                }
+
+
+                console.log(this.cards)
+
                 for (var key in json) {
                     this.values[key] = json[key]
                 }
                 this.setState({ values: this.values })
-            }).catch(e => { console.log("failed to get values") })
+            }).catch(e => { console.log(e) })
         //const values = getValues()
     }
+
+
+
+
 
     componentDidMount() {
         this.updateValues()
@@ -218,36 +260,36 @@ export default class CardHolder extends Component {
         return (
             <div className={`cardholder${this.props.embedded ? " embedded" : ""}`}>
                 {/* {this.open ? this.underCardHolders[this.activeUnderCardHolder] : ''} */}
-                {[...Array(this.underCardNums.length).keys()].map(
+                {Object.keys(this.cards).map(
                     ii =>
                         <UnderCardHolder
                             key={`UC${ii}`}
                             id={ii}
-                            cardNum={this.underCardNums[ii]}
-                            visibility={this.state.visibility[ii]}
-                            top={ii * this.totalHeight / (this.cardNum + this.underCardNums[ii])}
-                            height={this.totalHeight * this.underCardNums[ii] / (this.cardNum + this.underCardNums[ii])}
-                            active={ii === this.activeCard ? true : false}
-                            labels={this.state.underLabels[ii]}
+                            cardNum={this.cards[ii].underCardValues.length}
+                            visibility={this.cards[ii].underCardVisibility}
+                            top={ii * this.totalHeight / (this.cards.length + this.cards[ii].underCardValues.length)}
+                            height={this.totalHeight * this.cards[ii].underCardValues.length / (this.cards.length + this.cards[ii].underCardValues.length)}
+                            active={this.cards[ii].isActive}
+                            labels={Object.keys(this.cards[ii].underCardValues)}
                             onClick={this.onUnderChildClick}
-                            values={this.getUnderCardValues(ii)}
-                            background={this.underGradients[ii]}
-                            units={this.units[ii]}
+                            values={this.cards[ii].underCardValues}
+                            background={this.cards[ii].underGradient}
+                            units={this.cards[ii].unit}
                             embedded={this.props.embedded}
 
 
                         />
                 )}
-                {[...Array(this.cardNum).keys()].map(ii =>
+                {Object.keys(this.cards).map(ii =>
                     <Card
                         background={`${this.gradientList[ii]},linear-gradient(90deg, #1f3863, #111e34)`}
-                        text={`${this.cards[ii].label}${this.state.active[ii] ? this.state.active[ii] : ""}`}
+                        text={`${this.cards[ii].label}${this.cards[ii].activeLabel}`}
                         key={ii}
                         onClick={this.onChildClick}
                         id={ii}
-                        fade={this.state.fades[ii]}
-                        padding={this.totalHeight * this.underCardNums[ii] / (this.cardNum + this.underCardNums[ii])}
-                        value={this.state.active[ii] ? this.state.values[this.state.active[ii]] : ""}
+                        fade={this.cards[ii].fade}
+                        padding={this.totalHeight * this.cards[ii].underCardValues.length / (this.cards.length + this.cards[ii].underCardValues.length)}
+                        value={this.cards[ii].isActive ? this.cards[ii].activeLabel : ""}
                         units={this.cards[ii].unit}
                     />
                 )}
