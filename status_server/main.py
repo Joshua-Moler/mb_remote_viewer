@@ -128,18 +128,18 @@ def validateHeader(httpMethod, path, header, tls_ssl=False):
     validSignature = urlEncode(getSHA1Hash(
         urlEncode(clientSecret)+'&'+urlEncode(tokenSecret), oauthString))
     # print(header)
-    #print(authDict['oauth_signature'], validSignature)
+    # print(authDict['oauth_signature'], validSignature)
 
     return authDict['oauth_signature'] == validSignature
 
 
 data = OrderedDict({"Temperatures": {"PRP": 1000, "RGP": 500, "CFP": 300, "STP": 500},
-        "Pressures": {"P1": 53, "P2": 6, "P3": 91, "P4": 90},
-        "Flow": {},
-        "Valves": {},
-        "Pumps": {},
-        "Status": {"": "Manual"}
-        })
+                    "Pressures": {"P1": 53, "P2": 6, "P3": 91, "P4": 90},
+                    "Flow": {},
+                    "Valves": {},
+                    "Pumps": {},
+                    "Status": {"": "Manual"}
+                    })
 
 
 @app.route('/Temperatures', methods=["GET", "PUT"])
@@ -247,7 +247,29 @@ def All():
     if request.method == 'GET':
         if validateHeader('GET', '/All', request.headers):
             return jsonify(data)
-    abort(401)
+        abort(401)
+
+
+@app.route('/State/Set', methods=["GET"])
+def StateSet():
+    if request.method == 'POST':
+        if validateHeader('POST', '/State/Set', request.header):
+            sendControlState(request.get_json())
+        abort(401)
+
+
+@app.route('/Auth/Remote', methods=["POST"])
+def AuthRemote():
+    if request.method == 'POST':
+        if validateHeader('POST', '/Auth/Remote', request.header):
+            pass
+
+
+def sendControlState(state):
+    addr = ''
+    valves = {ii.lower(): state[ii] for ii in state if ii.lower()[0] == 'v'}
+    pumps = {ii.upper(): state[ii] for ii in state if ii.upper()[0:2] == 'PM'}
+    requests.post(addr+)
 
 
 if __name__ == '__main__':
