@@ -143,15 +143,18 @@ async def values():
         data = requests.get(restADR+"All", auth=statusServerAuth).json()
     except:
         data = {}
-    returnData = {ii.upper() : data[ii] for ii in data}
+    returnData = {ii.upper(): data[ii] for ii in data}
 
-
-    if "STATUS" not in returnData: returnData["STATUS"] = {}
-    if "TEMPERATURES" not in returnData: returnData["TEMPERATURES"] = {}
-    if "PRESSURES" not in returnData: returnData["PRESSURES"] = {}
-    if "SETPOINT" not in returnData: returnData["SETPOINT"] = {}
-    if "FLOW" not in returnData: returnData["FLOW"] = {}
-
+    if "STATUS" not in returnData:
+        returnData["STATUS"] = {}
+    if "TEMPERATURES" not in returnData:
+        returnData["TEMPERATURES"] = {}
+    if "PRESSURES" not in returnData:
+        returnData["PRESSURES"] = {}
+    if "SETPOINT" not in returnData:
+        returnData["SETPOINT"] = {}
+    if "FLOW" not in returnData:
+        returnData["FLOW"] = {}
 
     print(returnData)
     return returnData
@@ -160,6 +163,7 @@ async def values():
 @app.post("/setstate")
 async def setState(request: Request):
     body = await request.json()
+    requests.post(restADR+"State/Set", auth=statusServerAuth, json=body)
     print(body)
     return body
 

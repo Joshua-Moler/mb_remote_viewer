@@ -1,4 +1,5 @@
 import socketio
+
 sio = socketio.Client()
 
 
@@ -14,7 +15,7 @@ def connect_error(data):
 
 @sio.event
 def disconnect():
-    print('disconnected')
+    print("disconnected")
 
 
 @sio.on('test')
@@ -23,4 +24,4 @@ def test(data):
 
 
 sio.connect('http://localhost:5000',
-            auth={"username": "username", "password": "password"})
+            auth={"username": "asfasfasdfasdfas", "password": "asdfasdfalsjdakfalskdjfh"})
