@@ -53,6 +53,7 @@ function Control(props) {
     const [userStatus, setUserStatus] = useState(state)
     const [isChanging, setIsChanging] = useState(false)
     const [waiting, setWaiting] = useState(true)
+    const [pumpManagerOn, setPumpManagerOn] = useState("")
 
     const updateStatus = () => {
 
@@ -93,7 +94,7 @@ function Control(props) {
 
     const sendRequest = () => {
         setWaiting(true)
-        fetch(`${backendHost}/setstate`, { method: 'POST', body: JSON.stringify(userStatus) }).
+        fetch(`${backendHost}/setstate`, { method: 'POST', body: JSON.stringify(userStatus), credentials: 'include' }).
             then(data => data.json()).
             then(json => {
                 for (var key in status) {
@@ -186,6 +187,22 @@ function Control(props) {
         return isSameState
     }
 
+    const pumpMonitorManage = (id) => {
+        setPumpManagerOn(id)
+    }
+
+    const pumpManager = (id) => {
+        if (pumpManagerOn === '') return '';
+        return (<div style={{ position: "absolute", top: "0", left: "25vw", width: "75vw", height: "100vh", background: "rgb(0,0,0,0.5)", zIndex: "30", overflow: "hidden", color: "white", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <button style={{ background: "none", color: "white", width: "50%", borderColor: "white", borderTopStyle: "solid", borderLeftStyle: "solid", borderBottomStyle: "none", borderRightStyle: 'none', borderWidth: "1px", marginLeft: "10%", display: "flex", justifyContent: "center", marginBottom: "2%" }}
+                onClick={() => pumpMonitorManage('')}>
+                <div style={{ color: "white" }}>
+                    Manage
+                </div>
+            </button>
+        </div>)
+    }
+
     return (
         <div className="LogsScreen">
 
@@ -194,12 +211,14 @@ function Control(props) {
             <div style={{ marginLeft: "25vw", top: "10vh", height: "100%", width: "75vw", display: "flex", justifyContent: "flex-end", alignItems: "flex-start", background: "none", overflow: "hidden" }}>
                 <BoardController status={userStatus} handleClick={handleMapClick} />
                 <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", height: "100%", width: "300px", background: "none", flexDirection: "column", position: "relative" }}>
-                    <PumpMonitor id="PM1" color={userStatus['PM1'] ? '#00bbff' : '#ff00aa'} status={userStatus["PM1"] ? "Running" : "Idle"} statorFrequency={0} />
-                    <PumpMonitor id="PM2" color={userStatus['PM2'] ? '#00bbff' : '#ff00aa'} status={userStatus["PM2"] ? "Running" : "Idle"} statorFrequency={0} />
+                    <PumpMonitor id="PM1" color={userStatus['PM1'] ? '#00bbff' : '#ff00aa'} status={userStatus["PM1"] ? "Running" : "Idle"} statorFrequency={0} handleClick={pumpMonitorManage} />
+                    <PumpMonitor id="PM2" color={userStatus['PM2'] ? '#00bbff' : '#ff00aa'} status={userStatus["PM2"] ? "Running" : "Idle"} statorFrequency={0} handleClick={pumpMonitorManage} />
                     {requestChange()}
                 </div>
 
             </div>
+
+            {pumpManager(pumpManagerOn)}
 
 
 

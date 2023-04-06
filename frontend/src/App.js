@@ -18,7 +18,7 @@ function App() {
   if (!token) {
     return <Login setToken={setToken} />
   }
-  const logout = () => setToken(undefined)
+  const logout = () => { setToken(false); fetch("http://localhost:8000/logout", { method: 'POST', credentials: 'include' }) }
   return (
     <div className="wrapper">
       <BrowserRouter>

@@ -15,7 +15,7 @@ function PumpMonitor(props) {
                 Stator Frequency: {props.statorFrequency}
             </div>
             <button style={{ background: "none", color: "white", width: "50%", borderColor: "white", borderTopStyle: "solid", borderLeftStyle: "solid", borderBottomStyle: "none", borderRightStyle: 'none', borderWidth: "1px", marginLeft: "10%", display: "flex", justifyContent: "center", marginBottom: "2%" }}
-                onClick={() => console.log(props.id)}>
+                onClick={() => props.handleClick(props.id)}>
                 <div style={{ color: "white" }}>
                     Manage
                 </div>

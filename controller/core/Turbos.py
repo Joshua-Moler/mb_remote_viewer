@@ -423,15 +423,15 @@ def turbo_start(p=None):
         # Returns the running state of all turbos
         return (all(success), {ii: jj.running for ii, jj in _turbo_com.items()})
 
-    if hasattr(p, '__iter__'):
-        success = []
-        for ii in p:
-            success.append(_turbo_com[ii]._startOperation_()
-                           if ii in _turbo_com else False)
+    # if hasattr(p, '__iter__'):
+    #     success = []
+    #     for ii in p:
+    #         success.append(_turbo_com[ii]._startOperation_()
+    #                        if ii in _turbo_com else False)
 
-        # Success if all requested turbos started successfully.
-        # Returns the running state of all turbos
-        return (all(success), {ii: jj.running for ii, jj in _turbo_com.items()})
+    #     # Success if all requested turbos started successfully.
+    #     # Returns the running state of all turbos
+    #     return (all(success), {ii: jj.running for ii, jj in _turbo_com.items()})
 
     success = _turbo_com[p]._startOperation_() if p in _turbo_com else False
 
@@ -450,21 +450,21 @@ def turbo_stop(p=None):
         # Returns the running state of all turbos
         return (all(success), {ii: jj.running for ii, jj in _turbo_com.items()})
 
-    if hasattr(p, '__iter__'):
-        success = []
-        for ii in p:
-            success.append(_turbo_com[ii]._stopOperation_()
-                           if ii in _turbo_com else False)
+    # if hasattr(p, '__iter__'):
+    #     success = []
+    #     for ii in p:
+    #         success.append(_turbo_com[ii]._stopOperation_()
+    #                        if ii in _turbo_com else False)
 
-        # Success if all requested turbos stopped successfully.
-        # Returns the running state of all turbos
-        return (all(success), {ii: jj.running for ii, jj in _turbo_com.items()})
+    #     # Success if all requested turbos stopped successfully.
+    #     # Returns the running state of all turbos
+    #     return (all(success), {ii: jj.running for ii, jj in _turbo_com.items()})
 
     success = _turbo_com[p]._stopOperation_() if p in _turbo_com else False
 
     # Success if the requested turbo stopped successfully.
     # Returns the running state of all turbos
-    return (success, {ii: jj.running for ii, jj in _turbo_com.items()})
+    return (success, _turbo_com[p].running if p in _turbo_com else False)
 
 
 def turbo_ping(turbo):

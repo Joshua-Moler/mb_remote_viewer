@@ -1,3 +1,7 @@
 {
-    "REST_Endpoint": "ws://localhost:8765/"
+    "REST_Endpoint": "ws://localhost:8765/",
+    "Consumer_Key": "___IB_PROTOTYPE_SOFTWARE___",
+    "Token_Key": "___IB_STATUS_SERVER_ACCESS___",
+    "Consumer_Secret": "S789sdh@^@&*HFdls(S764SDF$",
+    "Token_Secret": "(*&^545Tyuju9876%^&*(hui*7"
 }

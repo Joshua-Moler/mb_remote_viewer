@@ -11,6 +11,8 @@ from flask_socketio import SocketIO
 from flask_socketio import ConnectionRefusedError
 import secrets
 
+import bcrypt
+
 from enum import Enum
 
 CLIENT_ACCESS_LEVEL = Enum(
@@ -78,6 +80,33 @@ def getTokenSecret(tokenKey):
     return b''
 
 
+def authenticateUser(username, password):
+    db_connection = sqlite3.connect('users.db')
+    sqlCursor = db_connection.cursor()
+
+    hashedPassword = sqlCursor.execute(
+        f"SELECT password FROM credentials WHERE username=?", (username, ))
+    passwordRetrieved = hashedPassword.fetchone()
+    if not passwordRetrieved:
+        return {"authenticated": False}
+    valid = bcrypt.checkpw(password, passwordRetrieved[0])
+
+    tokenKey = secrets.token_hex(16)
+    tokenSecret = secrets.token_hex(64)
+
+    db_connection.close()
+    db_connection = sqlite3.connect('clients.db')
+    sqlCursor = db_connection.cursor()
+
+    sqlCursor.execute(
+        "INSERT INTO tokens (token_key, token_secret) VALUES(?, ?)", (tokenKey, tokenSecret))
+
+    db_connection.commit()
+    db_connection.close()
+
+    return {"authenticated": valid, "tokenKey": tokenKey, 'tokenSecret': tokenSecret}
+
+
 def registerProviderClient(serialNumber):
     serialNumber = getSafeSQL(serialNumber)
     db_connection = sqlite3.connect('clients.db')
@@ -87,7 +116,7 @@ def registerProviderClient(serialNumber):
         f"SELECT EXISTS(SELECT 1 FROM recognized_serial_numbers WHERE serial_number='{serialNumber}' AND registered='{False}')"
     )
 
-    if not sqlCursor.fetchone():
+    if not sqlCursor.fetchone()[0]:
         return False
 
     while True:
@@ -95,7 +124,7 @@ def registerProviderClient(serialNumber):
         sqlCursor.execute(
             f"SELECT EXISTS(SELECT 1 FROM clients WHERE client_key='{clientKey}')"
         )
-        if sqlCursor.fetchone():
+        if sqlCursor.fetchone()[0]:
             break
     clientKey = clientKey + serialNumber + str(time.time())
     clientSecret = secrets.token_hex(256)
@@ -107,6 +136,14 @@ def registerProviderClient(serialNumber):
     db_connection.close()
 
     return True
+
+
+def removeTokenAccess(token):
+    db_connection = sqlite3.connect('clients.db')
+    sqlCursor = db_connection.cursor()
+    sqlCursor.execute("DELETE FROM tokens WHERE token_key=?", (token, ))
+    db_connection.commit()
+    db_connection.close()
 
 
 def addRemoteUser(header, user):
@@ -165,6 +202,7 @@ def verifyTimestamp(timestamp):
 
 
 def getOAuthString(method, url, parameters):
+    print(parameters)
     andSymbol = urlEncode('&')
     encodedMethod = urlEncode(method)
     encodedurl = urlEncode(url)
@@ -173,11 +211,22 @@ def getOAuthString(method, url, parameters):
         if key != 'oauth_signature':
             encodedParams += f'{urlEncode(key)}{urlEncode("=")}{urlEncode(value)}{andSymbol}'
     encodedParams = encodedParams[:-len(andSymbol)]
-    return encodedMethod + '&' + encodedurl + '&' + encodedParams
+    OAuthString = encodedMethod + '&' + encodedurl + '&' + encodedParams
+    print(OAuthString)
+    return OAuthString
 
 
 def getSHA1Hash(key, str):
     return b64encode(hmac.new(bytes(key, 'utf-8'), bytes(str, 'utf-8'), sha1).digest()).decode()
+
+
+def getAuthTokenKey(header):
+    if 'Authorization' not in header:
+        return ""
+    authHeader = header["Authorization"].replace("\"", "").\
+        split(None, 1)[-1].split(", ")
+    authDict = dict(item.split("=") for item in authHeader)
+    return authDict["oauth_token"]
 
 
 def validateHeader(httpMethod, path, header, tls_ssl=False):
@@ -193,15 +242,18 @@ def validateHeader(httpMethod, path, header, tls_ssl=False):
         return False
 
     prefix = 'https://' if tls_ssl else 'http://'
-
-    oauthHost = prefix + header["Host"] + path
+    if "Host" in header:
+        oauthHost = prefix + header["Host"] + path
+    else:
+        oauthHost = path
     oauthString = getOAuthString(httpMethod, oauthHost, authDict)
     clientSecret = getClientSecret(authDict['oauth_consumer_key'])
     tokenSecret = getTokenSecret(authDict['oauth_token'])
+    print(f"CLIENT SECRET: {clientSecret}\nTOKEN SECRET: {tokenSecret}")
     validSignature = urlEncode(getSHA1Hash(
         urlEncode(clientSecret)+'&'+urlEncode(tokenSecret), oauthString))
-    # print(header)
-    # print(authDict['oauth_signature'], validSignature)
+    print(header)
+    print(authDict['oauth_signature'], validSignature)
 
     return authDict['oauth_signature'] == validSignature
 
@@ -335,11 +387,26 @@ def StateSet():
         abort(401)
 
 
-@app.route('/Auth/Remote', methods=["POST"])
+@app.route("/Remote/Logout", methods=["POST"])
+def LogoutRemote():
+    if request.method == 'POST':
+        if validateHeader('POST', '/Remote/Logout', request.headers):
+            tokenKey = getAuthTokenKey(request.headers)
+            removeTokenAccess(tokenKey)
+            return jsonify([True])
+        abort(401)
+
+
+@app.route('/Remote/Auth', methods=["POST"])
 def AuthRemote():
     if request.method == 'POST':
-        if validateHeader('POST', '/Auth/Remote', request.headers):
-            pass
+        if validateHeader('POST', '/Remote/Auth', request.headers):
+            creds = request.json
+            if 'username' and 'password' not in creds:
+                abort(422)
+
+            return jsonify(authenticateUser(creds['username'], creds['password']))
+        abort(401)
 
 
 @app.route('/Remote/Grant-User-Remote-Access', methods=["POST"])
@@ -349,6 +416,8 @@ def GrantUserRemoteAccess():
         if validateHeader('POST', '/Remote/Grant-User-Remote-Access', request.headers) and \
                 getClientType(request.headers) == CLIENT_ACCESS_LEVEL.PROVIDER_CLIENT:
             addRemoteUser(request.headers, data['user'])
+            return jsonify([True])
+        abort(401)
 
 
 def getNewConsumerKey(seed):
@@ -371,15 +440,33 @@ def sendControlState(state):
     addr = ''
     valves = {ii.lower(): state[ii] for ii in state if ii.lower()[0] == 'v'}
     pumps = {ii.upper(): state[ii] for ii in state if ii.upper()[0:2] == 'PM'}
-    print(pumps)
-    socketio.emit('test', {'valves': valves, 'pumps': pumps})
+    print('emitting')
+    socketio.call(
+        'set_state', {'valves': valves, 'pumps': pumps}, to=addr)
+    #print(success, returnState)
+    print('emitted')
+    return ["recieved"]
 
 
 @socketio.on('connect')
 def test_connect(auth):
     print('')
-    print(auth, request.sid)
-    print('')
+
+    authenticated = validateHeader(
+        "POST", "http://localhost:5000", {"Authorization": auth})
+
+    if not authenticated:
+        return False
+
+
+@app.route("/test")
+def oauthtesting():
+    print('OAuthTesting')
+    if request.method == 'GET':
+        print(request.headers)
+        if validateHeader('GET', '/test', request.headers):
+            return [True]
+        abort(401)
 
 
 if __name__ == '__main__':

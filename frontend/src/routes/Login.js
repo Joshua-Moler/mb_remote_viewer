@@ -9,8 +9,10 @@ const backendHost = serverParameters['Backend_Host']
 async function loginUser(credentials) {
     return fetch(`${backendHost}/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': "http://localhost:3000"
         },
         body: JSON.stringify(credentials)
     })
@@ -18,20 +20,54 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [invalidCredentials, setInvalidCredentials] = useState("none");
 
     const handleSubmit = async e => {
+        document.getElementById("Login-Form").reset()
         e.preventDefault();
-        const token = await loginUser({
+        if (username === '' || password === '') {
+            setInvalidCredentials("empty")
+            return
+        }
+        const logInJson = await loginUser({
             username, password
         });
-        setToken(token)
+        let token = ''
+        if (logInJson["authenticated"] === true && logInJson['token']) {
+            token = logInJson['token']
+        }
+        else if (logInJson['authenticated'] === false) {
+            setInvalidCredentials("invalid")
+        }
+
+        setToken({ 'token': true })
     }
+
+    const displayInvalid = () => {
+        if (invalidCredentials === "invalid") {
+            return (
+                <div style={{ color: "red" }}>
+                    Invalid Credentials
+                </div>
+            )
+        }
+        else if (invalidCredentials === 'empty') {
+            return (
+                <div style={{ color: "blue" }}>
+                    Please Provide Login Information
+                </div>)
+        }
+        else {
+            return ("")
+        }
+    }
+
     return (
         <div className="login-wrapper">
             <h1>Please Log In</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} id="Login-Form">
                 <label>
                     <p>Username</p>
                     <input type="text" onChange={e => setUserName(e.target.value)} />
@@ -44,6 +80,7 @@ export default function Login({ setToken }) {
                     <button type="submit">Submit</button>
                 </div>
             </form>
+            {displayInvalid()}
         </div>
     )
 }

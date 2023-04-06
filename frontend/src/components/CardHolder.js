@@ -92,7 +92,8 @@ export default class CardHolder extends Component {
 
     updateValues = () => {
         fetch(`${backendHost}/values`, {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include'
         }).then(data => data.json())
             .then(json => {
                 console.log(json)

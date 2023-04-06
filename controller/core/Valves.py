@@ -133,8 +133,8 @@ def valve_open(valve):
     newState = _valve_com.valveState[valve - 1]
     print(newState, initialState)
 
-    # Success if the valve was opened. Returns the final state of the valve.
-    return (newState != initialState, newState)
+    # Success if the valve is opened. Returns the final state of the valve.
+    return (newState, newState)
 
 # Closes a single valve
 
@@ -149,8 +149,8 @@ def valve_close(valve):
         _valve_com.toggleValve('v'+str(valve))
     newState = _valve_com.valveState[valve - 1]
 
-    # Success if the valve was closed. Returns the final state of the valve.
-    return (newState != initialState, newState)
+    # Success if the valve is closed. Returns the final state of the valve.
+    return (not newState, newState)
 
 
 def valve_toggle(valve):

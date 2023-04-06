@@ -118,7 +118,8 @@ async def turboHandshake(turbo):
 
 @app.post("/turbos/query/{turbo}")
 async def turboQuery(turbo, request: Request):
-    return turbo_query(turbo, request.json())
+    data = await request.json()
+    return turbo_query(turbo, data)
 
 
 @app.get("/lakeshore/temperatures/")
@@ -137,6 +138,28 @@ async def checkLakeshoreValues():
 @app.get("/lakeshore/temperatures/{t}")
 async def checkTemperature(t):
     return check_temperature(t)
+
+
+@app.post("/remote/set/all")
+async def setAll(request: Request):
+    data = await request.json()
+    valves = {}
+    if 'valves' in data:
+        valves = data['valves']
+    pumps = {}
+    if 'pumps' in data:
+        pumps = data['pumps']
+    returnValves = {}
+    for valve, state in valves.items():
+        success, returnValves[valve] = valve_open(
+            valve) if state else valve_close(valve)
+    returnPumps = {}
+    for turbo, state in pumps.items():
+        success, returnPumps[turbo] = turbo_start(
+            turbo) if state else turbo_stop(turbo)
+    print({'valves': returnValves, 'pumps': returnPumps})
+    return success, {'valves': returnValves, 'pumps': returnPumps}
+
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
