@@ -355,6 +355,7 @@ def Valves():
             values = request.get_json()
             for key, value in values.items():
                 data["Valves"][key] = value
+            print(data["Valves"])
             return jsonify(data["Valves"])
         abort(401)
 
@@ -387,7 +388,8 @@ def All():
 def GetState():
     if request.method == 'GET':
         if validateHeader('GET', '/State', request.headers):
-            return jsonify({"valves": data["Valves"], "pumps": data["Pumps"]})
+            print(data['Valves'])
+            return jsonify({"Valves": data["Valves"], "Pumps": data["Pumps"]})
         abort(401)
 
 
@@ -468,7 +470,7 @@ def test_connect(auth):
         sids[token] = request.sid
     print("New Websocket Connection.\n", sids)
     authenticated = validateHeader(
-        "POST", "http://localhost:5000", {"Authorization": auth})
+        "POST", "http://192.168.4.79:5000", {"Authorization": auth})
 
     if not authenticated:
         return False
