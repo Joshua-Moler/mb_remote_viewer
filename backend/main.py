@@ -184,40 +184,20 @@ def getAuthFromToken(cookie):
 
 
 @app.get("/status")
-async def status():
-    return {
-
-        "v1": False,
-        "v2": False,
-        "v3": False,
-        "v4": False,
-        "v5": False,
-        "v6": False,
-        "v7": False,
-        "v8": False,
-        "v9": False,
-        "v10": False,
-        "v11": False,
-        "v12": False,
-        "v13": False,
-        "v14": False,
-        "v15": False,
-        "v16": False,
-        "v17": False,
-        "v18": False,
-        "v19": False,
-        "v20": False,
-        "v21": False,
-        "v22": False,
-        "v23": False,
-        "v24": False,
-        "PM1": False,
-        "PM2": False,
-        "PM3": False,
-        "PM4": False,
-        "PM5": False
-
-    }
+async def status(request: Request):
+    cookie = request.cookies
+    auth = getAuthFromToken(cookie)
+    response = requests.get(restADR+"State", auth=auth)
+    try:
+        data = response.json()
+        status = {}
+        for valve in data['Valves']:
+            status[valve.lower()] = data["Valves"][valve]
+        for pump in data["Pumps"]:
+            status[pump.lower()] = data["Pumps"][pump]
+    except:
+        status = {}
+    return status
 
 
 @app.get("/values")
@@ -259,11 +239,10 @@ async def setState(request: Request):
         raise HTTPException(response.status_code)
     try:
         data = response.json()
-        print(data)
     except:
-        data = body
+        data = [False, body]
     print(data)
-    return body
+    return data
 
 
 @app.on_event("startup")

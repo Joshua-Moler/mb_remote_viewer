@@ -1,4 +1,5 @@
 import uvicorn
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_utils.tasks import repeat_every
@@ -26,21 +27,31 @@ from core.Temperatures import check_temperature, check_resistance
 
 from core.ComPorts import getDeviceMap, getTemperatureSensors
 
-deviceMap = getDeviceMap()
-print(deviceMap)
-if "Valves" in deviceMap:
-    print(f'Initialized valve com: {valvesInit(deviceMap["Valves"])}')
-if "Pressures" in deviceMap:
-    print(f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
-if "PM1" in deviceMap:
-    print(f'Initialized turbo com: {turbosInit(["PM1"], deviceMap["PM1"])}')
-if "PM2" in deviceMap:
-    print(f'Initialized turbo com: {turbosInit(["PM2"], deviceMap["PM2"])}')
 
-temperaturesInit(getTemperatureSensors())
+def initDevices():
+    deviceMap = getDeviceMap()
+    print(deviceMap)
+    if "Valves" in deviceMap:
+        print(f'Initialized valve com: {valvesInit(deviceMap["Valves"])}')
+    if "Pressures" in deviceMap:
+        print(
+            f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
+    if "PM1" in deviceMap:
+        print(
+            f'Initialized turbo com: {turbosInit(["PM1"], deviceMap["PM1"])}')
+    if "PM2" in deviceMap:
+        print(
+            f'Initialized turbo com: {turbosInit(["PM2"], deviceMap["PM2"])}')
+
+    temperaturesInit(getTemperatureSensors())
 
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+async def app_startup():
+    initDevices()
 
 app.add_middleware(
     CORSMiddleware,
@@ -159,7 +170,6 @@ async def setAll(request: Request):
             turbo) if state else turbo_stop(turbo)
     print({'valves': returnValves, 'pumps': returnPumps})
     return success, {'valves': returnValves, 'pumps': returnPumps}
-
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)

@@ -79,6 +79,10 @@ if __name__ == '__main__':
     @sio.event
     def connect_error(data):
         print(f"connection failed: {data}")
+        print("Retrying:")
+        time.sleep(5)
+        sio.connect('http://localhost:5000',
+                    auth=getAuth("POST", "http://localhost:5000"))
 
     @sio.event
     def disconnect():
@@ -86,9 +90,10 @@ if __name__ == '__main__':
 
     @sio.on('set_state')
     def test(data):
-        response = requests.post(
-            'http://localhost:8080/remote/set/all', json=data)
+
         try:
+            response = requests.post(
+                'http://127.0.0.1:8080/remote/set/all', json=data)
             success, newState = response.json()
         except:
             success = False
@@ -97,7 +102,7 @@ if __name__ == '__main__':
         # sio.emit('valve-put', newState['valves'])
         # sio.emit('pump-put', newState['pumps'])
 
-        return success
+        return (success, newState)
 
     sio.connect('http://localhost:5000',
                 auth=getAuth("POST", "http://localhost:5000"))

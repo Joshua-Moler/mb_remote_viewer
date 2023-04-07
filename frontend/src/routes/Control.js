@@ -54,13 +54,15 @@ function Control(props) {
     const [isChanging, setIsChanging] = useState(false)
     const [waiting, setWaiting] = useState(true)
     const [pumpManagerOn, setPumpManagerOn] = useState("")
+    const [opSuccess, setOpSuccess] = useState(true)
 
     const updateStatus = () => {
 
 
-        fetch(`${backendHost}/status`, { method: 'GET' }).
+        fetch(`${backendHost}/status`, { method: 'GET', credentials: 'include' }).
             then(data => data.json()).
             then(json => {
+                console.log("STATE RECIEVED: ", json)
                 for (var key in status) {
                     if (json[key] === undefined) {
                         json[key] = status[key]
@@ -97,6 +99,13 @@ function Control(props) {
         fetch(`${backendHost}/setstate`, { method: 'POST', body: JSON.stringify(userStatus), credentials: 'include' }).
             then(data => data.json()).
             then(json => {
+
+                if (json[0] == false) {
+                    console.log('failed')
+                }
+                setOpSuccess(json[0])
+                let newState = json[1]
+                console.log(newState)
                 for (var key in status) {
                     if (json[key] === undefined) {
                         json[key] = status[key]
@@ -110,14 +119,14 @@ function Control(props) {
 
                 )
 
-                var isSameState = true
+                // var isSameState = true
 
-                for (let key in json) {
-                    if (json[key] != userStatus[key]) {
-                        isSameState = false
-                    }
-                }
-
+                // for (let key in json) {
+                //     if (json[key] != userStatus[key]) {
+                //         isSameState = false
+                //     }
+                // }
+                console.log(json)
 
                 setUserStatus(json)
                 setIsChanging(false)
