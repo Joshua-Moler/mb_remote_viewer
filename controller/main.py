@@ -38,10 +38,17 @@ def initDevices():
             f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
     if "PM1" in deviceMap:
         print(
+<<<<<<< HEAD
+            f'Initialized turbo com: {turbosInit(["PM1"], [deviceMap["PM1"]])}')
+    if "PM2" in deviceMap:
+        print(
+            f'Initialized turbo com: {turbosInit(["PM2"], [deviceMap["PM2"]])}')
+=======
             f'Initialized turbo com: {turbosInit(["PM1"], deviceMap["PM1"])}')
     if "PM2" in deviceMap:
         print(
             f'Initialized turbo com: {turbosInit(["PM2"], deviceMap["PM2"])}')
+>>>>>>> 07bfe38092ac67c76db215c562631e5f2b8e7b22
 
     temperaturesInit(getTemperatureSensors())
 
@@ -109,7 +116,7 @@ async def checkPressures():
 
 @app.get("/pressures/{p}")
 async def checkPressure(p):
-    return checkPressure(p)
+    return check_Pressure(p)
 
 
 @app.post("/turbos/start/{turbo}")
@@ -140,7 +147,9 @@ async def checkTemperatures():
 
 @app.get("/lakeshore/values")
 async def checkLakeshoreValues():
+
     temperatures = check_temperature()
+    print(temperatures)
     resistance = check_resistance()
     return (temperatures[0] and resistance[0],
             {"temperature": temperatures[1], "resistance": resistance[1]})
@@ -164,11 +173,14 @@ async def setAll(request: Request):
     for valve, state in valves.items():
         success, returnValves[valve] = valve_open(
             valve) if state else valve_close(valve)
+        print(f"SUCCESS? {valve} : {success}")
     returnPumps = {}
     for turbo, state in pumps.items():
         success, returnPumps[turbo] = turbo_start(
             turbo) if state else turbo_stop(turbo)
+        print(f"SUCCESS? {turbo} : {success}")
     print({'valves': returnValves, 'pumps': returnPumps})
+    
     return success, {'valves': returnValves, 'pumps': returnPumps}
 
 if __name__ == '__main__':

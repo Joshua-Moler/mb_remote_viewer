@@ -190,13 +190,17 @@ async def status(request: Request):
     response = requests.get(restADR+"State", auth=auth)
     try:
         data = response.json()
+        print('data', data)
         status = {}
         for valve in data['Valves']:
-            status[valve.lower()] = data["Valves"][valve]
+            status[valve.lower()] = not data["Valves"][valve]
+        print('status', status)
         for pump in data["Pumps"]:
-            status[pump.lower()] = data["Pumps"][pump]
-    except:
+            status[pump.upper()] = data["Pumps"][pump]
+    except Exception as e:
+        print(e)
         status = {}
+    print(status)
     return status
 
 
@@ -238,11 +242,23 @@ async def setState(request: Request):
     if response.status_code != 200:
         raise HTTPException(response.status_code)
     try:
-        data = response.json()
+        success, state = response.json()
     except:
-        data = [False, body]
-    print(data)
-    return data
+        success, state = [False, body]
+
+    print((success, state))
+
+    newState = {}
+    if 'valves' in state:
+        for valve in state['valves']:
+            newState[valve.lower()] = not state['valves'][valve]
+    if 'pumps' in state:
+        for pump in state['pumps']:
+            newState[pump.upper()] = state['pumps'][pump]
+
+    print((success, newState))
+
+    return (success, newState)
 
 
 @app.on_event("startup")

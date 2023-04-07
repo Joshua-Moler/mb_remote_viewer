@@ -16,9 +16,9 @@
             "vid": 9705
         },
         "PM2": {
-            "serial_number": "_",
-            "pid": 0,
-            "vid": 0
+            "serial_number": "",
+            "pid": 3000,
+            "vid": 9705
         }
     },
     "Sensors": {

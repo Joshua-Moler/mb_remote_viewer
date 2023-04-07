@@ -42,10 +42,7 @@ function Control(props) {
         "v23": false,
         "v24": false,
         "PM1": false,
-        "PM2": false,
-        "PM3": false,
-        "PM4": false,
-        "PM5": false
+        "PM2": false
 
     }
 
@@ -102,20 +99,21 @@ function Control(props) {
 
                 if (json[0] == false) {
                     console.log('failed')
+                    return
                 }
                 setOpSuccess(json[0])
                 let newState = json[1]
                 console.log(newState)
                 for (var key in status) {
-                    if (json[key] === undefined) {
-                        json[key] = status[key]
+                    if (newState[key] === undefined) {
+                        newState[key] = status[key]
                     }
                 }
 
 
                 setStatus(
 
-                    json
+                    newState
 
                 )
 
@@ -128,7 +126,7 @@ function Control(props) {
                 // }
                 console.log(json)
 
-                setUserStatus(json)
+                setUserStatus(newState)
                 setIsChanging(false)
 
                 setWaiting(false)

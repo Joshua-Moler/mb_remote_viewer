@@ -312,6 +312,7 @@ class opsManager():
         return not self.running
 
     def setSerialPort(self, serialPort):
+        print(f"Turbo com: {serialPort}")
         if self.serialManager.isOpen():
             self.serialManager.close()
         self.serialManager.port = serialPort
@@ -403,6 +404,7 @@ _turbo_com = {}
 
 
 def init(identifiers: list, serialPorts: list):
+    print(serialPorts)
     for ii, jj in zip(identifiers, serialPorts):
         _turbo_com[ii] = opsManager()
         _turbo_com[ii].setSerialPort(jj)
@@ -437,7 +439,7 @@ def turbo_start(p=None):
 
     # Success if the requested turbo started successfully.
     # Returns the running state of all turbos
-    return (success, {ii: jj.running for ii, jj in _turbo_com.items()})
+    return (success, _turbo_com[p].running if p in _turbo_com else False)
 
 
 def turbo_stop(p=None):
