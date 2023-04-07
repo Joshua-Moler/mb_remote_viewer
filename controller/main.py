@@ -38,10 +38,17 @@ def initDevices():
             f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
     if "PM1" in deviceMap:
         print(
+<<<<<<< HEAD
             f'Initialized turbo com: {turbosInit(["PM1"], [deviceMap["PM1"]])}')
     if "PM2" in deviceMap:
         print(
             f'Initialized turbo com: {turbosInit(["PM2"], [deviceMap["PM2"]])}')
+=======
+            f'Initialized turbo com: {turbosInit(["PM1"], deviceMap["PM1"])}')
+    if "PM2" in deviceMap:
+        print(
+            f'Initialized turbo com: {turbosInit(["PM2"], deviceMap["PM2"])}')
+>>>>>>> 07bfe38092ac67c76db215c562631e5f2b8e7b22
 
     temperaturesInit(getTemperatureSensors())
 

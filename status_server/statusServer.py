@@ -28,6 +28,8 @@ pumpNum = 2
 nonceList = {}
 maxTimestampGap = 10
 
+userResources = {}
+
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -81,22 +83,26 @@ def getTokenSecret(tokenKey):
 
 
 def authenticateUser(username, password):
-    db_connection = sqlite3.connect('users.db')
+    db_connection = sqlite3.connect('clients.db')
     sqlCursor = db_connection.cursor()
 
     hashedPassword = sqlCursor.execute(
-        f"SELECT password FROM credentials WHERE username=?", (username, ))
+        f"SELECT password FROM user_credentials WHERE username=?", (username, ))
     passwordRetrieved = hashedPassword.fetchone()
     if not passwordRetrieved:
         return {"authenticated": False}
-    valid = bcrypt.checkpw(password, passwordRetrieved[0])
+    valid = bcrypt.checkpw(password.encode(
+        'utf-8'), passwordRetrieved[0].encode('utf-8'))
 
     tokenKey = secrets.token_hex(16)
     tokenSecret = secrets.token_hex(64)
 
-    db_connection.close()
-    db_connection = sqlite3.connect('clients.db')
-    sqlCursor = db_connection.cursor()
+    sqlCursor.execute(
+        "SELECT resource FROM user_access WHERE username=?", (username, ))
+
+    userResource = sqlCursor.fetchone()[0]
+
+    userResources[tokenKey] = userResource
 
     sqlCursor.execute(
         "INSERT INTO tokens (token_key, token_secret) VALUES(?, ?)", (tokenKey, tokenSecret))
@@ -202,7 +208,6 @@ def verifyTimestamp(timestamp):
 
 
 def getOAuthString(method, url, parameters):
-    print(parameters)
     andSymbol = urlEncode('&')
     encodedMethod = urlEncode(method)
     encodedurl = urlEncode(url)
@@ -212,7 +217,6 @@ def getOAuthString(method, url, parameters):
             encodedParams += f'{urlEncode(key)}{urlEncode("=")}{urlEncode(value)}{andSymbol}'
     encodedParams = encodedParams[:-len(andSymbol)]
     OAuthString = encodedMethod + '&' + encodedurl + '&' + encodedParams
-    print(OAuthString)
     return OAuthString
 
 
@@ -227,6 +231,19 @@ def getAuthTokenKey(header):
         split(None, 1)[-1].split(", ")
     authDict = dict(item.split("=") for item in authHeader)
     return authDict["oauth_token"]
+
+
+def getAuthConsumerKey(header):
+    if 'Authorization' not in header:
+        return None
+    try:
+        authHeader = header["Authorization"].replace("\"", "").\
+            split(None, 1)[-1].split(", ")
+        authDict = dict(item.split("=") for item in authHeader)
+        return authDict["oauth_consumer_key"]
+    except Exception as e:
+        print(e)
+        return None
 
 
 def validateHeader(httpMethod, path, header, tls_ssl=False):
@@ -249,11 +266,8 @@ def validateHeader(httpMethod, path, header, tls_ssl=False):
     oauthString = getOAuthString(httpMethod, oauthHost, authDict)
     clientSecret = getClientSecret(authDict['oauth_consumer_key'])
     tokenSecret = getTokenSecret(authDict['oauth_token'])
-    print(f"CLIENT SECRET: {clientSecret}\nTOKEN SECRET: {tokenSecret}")
     validSignature = urlEncode(getSHA1Hash(
         urlEncode(clientSecret)+'&'+urlEncode(tokenSecret), oauthString))
-    print(header)
-    print(authDict['oauth_signature'], validSignature)
 
     return authDict['oauth_signature'] == validSignature
 
@@ -270,7 +284,6 @@ data = OrderedDict({"Temperatures": {"PRP": 1000, "RGP": 500, "CFP": 300, "STP":
 @app.route('/Temperatures', methods=["GET", "PUT"])
 def Temperatures():
     if request.method == 'GET':
-        print(request.headers)
         if validateHeader('GET', '/Temperatures', request.headers):
             return jsonify(data["Temperatures"])
         abort(401)
@@ -294,7 +307,6 @@ def Temperatures():
             values = request.get_json()
             for key, value in values.items():
                 data["Temperatures"][key] = value
-            print('\n\n', data['Temperatures'])
             return jsonify(data["Temperatures"])
         abort(401)
 
@@ -311,7 +323,6 @@ def Pressures():
             values = request.get_json()
             for key, value in values.items():
                 data["Pressures"][key] = value
-            print('\n\n', data['Pressures'])
             return jsonify(data["Pressures"])
         abort(401)
 
@@ -328,7 +339,6 @@ def Flow():
             values = request.get_json()
             for key, value in values.items():
                 data["Flow"][key] = value
-            print('\n\n', data['Flow'])
             return jsonify(data["Flow"])
         abort(401)
 
@@ -345,7 +355,7 @@ def Valves():
             values = request.get_json()
             for key, value in values.items():
                 data["Valves"][key] = value
-            print('\n\n', data['Valves'])
+            print(data["Valves"])
             return jsonify(data["Valves"])
         abort(401)
 
@@ -362,7 +372,6 @@ def Pumps():
             values = request.get_json()
             for key, value in values.items():
                 data["Pumps"][key] = value
-            print('\n\n', data['Pumps'])
             return jsonify(data["Pumps"])
         abort(401)
 
@@ -375,15 +384,22 @@ def All():
         abort(401)
 
 
+@app.route('/State', methods=['GET'])
+def GetState():
+    if request.method == 'GET':
+        if validateHeader('GET', '/State', request.headers):
+            print(data['Valves'])
+            return jsonify({"Valves": data["Valves"], "Pumps": data["Pumps"]})
+        abort(401)
+
+
 @app.route('/State/Set', methods=["POST"])
 def StateSet():
-    print('setstate')
     if request.method == 'POST':
         if validateHeader('POST', '/State/Set', request.headers):
-            print(request.get_json())
-            sendControlState(request.get_json())
-            print("second")
-            return ""
+            resource = userResources[getAuthTokenKey(request.headers)]
+            success, newState = sendControlState(request.get_json(), resource)
+            return jsonify([success, newState])
         abort(401)
 
 
@@ -434,29 +450,42 @@ def RegisterProviderClient():
 
 
 socketio = SocketIO(app)
+sids = {}
 
 
-def sendControlState(state):
-    addr = ''
-    valves = {ii.lower(): state[ii] for ii in state if ii.lower()[0] == 'v'}
+def sendControlState(state, to):
+    addr = sids[to]
+    valves = {ii.lower(): not state[ii]
+              for ii in state if ii.lower()[0] == 'v'}
     pumps = {ii.upper(): state[ii] for ii in state if ii.upper()[0:2] == 'PM'}
-    print('emitting')
-    socketio.call(
+    success, newState = socketio.call(
         'set_state', {'valves': valves, 'pumps': pumps}, to=addr)
-    #print(success, returnState)
-    print('emitted')
-    return ["recieved"]
+    # print(success, returnState)
+    return success, newState
 
 
 @socketio.on('connect')
 def test_connect(auth):
-    print('')
-
+    token = getAuthConsumerKey({"Authorization": auth})
+    if token:
+        sids[token] = request.sid
+    print("New Websocket Connection.\n", sids)
     authenticated = validateHeader(
-        "POST", "http://localhost:5000", {"Authorization": auth})
+        "POST", "http://192.168.4.79:5000", {"Authorization": auth})
 
     if not authenticated:
         return False
+
+
+@socketio.on('disconnect')
+def disconnect():
+    sid = request.sid
+    toDelete = None
+    for token in sids:
+        if sids[token] == sid:
+            toDelete = token
+    if toDelete in sids:
+        del sids[toDelete]
 
 
 @app.route("/test")
@@ -470,4 +499,4 @@ def oauthtesting():
 
 
 if __name__ == '__main__':
-    socketio.run(app)
+    socketio.run(app, host='0.0.0.0')

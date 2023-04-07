@@ -81,8 +81,13 @@ if __name__ == '__main__':
         print(f"connection failed: {data}")
         print("Retrying:")
         time.sleep(5)
+<<<<<<< HEAD
         sio.connect('http://192.168.4.79:5000',
                     auth=getAuth("POST", "http://192.168.4.79:5000"))
+=======
+        sio.connect('http://localhost:5000',
+                    auth=getAuth("POST", "http://localhost:5000"))
+>>>>>>> 07bfe38092ac67c76db215c562631e5f2b8e7b22
 
     @sio.event
     def disconnect():
