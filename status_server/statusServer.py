@@ -91,7 +91,8 @@ def authenticateUser(username, password):
     passwordRetrieved = hashedPassword.fetchone()
     if not passwordRetrieved:
         return {"authenticated": False}
-    valid = bcrypt.checkpw(password, passwordRetrieved[0])
+    valid = bcrypt.checkpw(password.encode(
+        'utf-8'), passwordRetrieved[0].encode('utf-8'))
 
     tokenKey = secrets.token_hex(16)
     tokenSecret = secrets.token_hex(64)
@@ -456,7 +457,7 @@ def sendControlState(state, to):
     pumps = {ii.upper(): state[ii] for ii in state if ii.upper()[0:2] == 'PM'}
     success, newState = socketio.call(
         'set_state', {'valves': valves, 'pumps': pumps}, to=addr)
-    #print(success, returnState)
+    # print(success, returnState)
     return success, newState
 
 
