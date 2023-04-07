@@ -455,7 +455,8 @@ sids = {}
 
 def sendControlState(state, to):
     addr = sids[to]
-    valves = {ii.lower(): state[ii] for ii in state if ii.lower()[0] == 'v'}
+    valves = {ii.lower(): not state[ii]
+              for ii in state if ii.lower()[0] == 'v'}
     pumps = {ii.upper(): state[ii] for ii in state if ii.upper()[0:2] == 'PM'}
     success, newState = socketio.call(
         'set_state', {'valves': valves, 'pumps': pumps}, to=addr)
