@@ -272,8 +272,8 @@ def validateHeader(httpMethod, path, header, tls_ssl=False):
     return authDict['oauth_signature'] == validSignature
 
 
-data = OrderedDict({"Temperatures": {"PRP": 1000, "RGP": 500, "CFP": 300, "STP": 500},
-                    "Pressures": {"P1": 53, "P2": 6, "P3": 91, "P4": 90},
+data = OrderedDict({"Temperatures": {},
+                    "Pressures": {},
                     "Flow": {},
                     "Valves": {},
                     "Pumps": {},
@@ -372,6 +372,7 @@ def Pumps():
             values = request.get_json()
             for key, value in values.items():
                 data["Pumps"][key] = value
+            print(data["Pumps"])
             return jsonify(data["Pumps"])
         abort(401)
 

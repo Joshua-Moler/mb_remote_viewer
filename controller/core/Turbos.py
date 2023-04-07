@@ -275,7 +275,7 @@ class opsManager():
             # print('start query failed')
             return False
         # print('pump is already running')
-        return False
+        return self.running
 
     def _maintainOperationState_(self):
         self._checkRunning_()
@@ -309,7 +309,7 @@ class opsManager():
             # print('stop query failed')
             return False
         # print('pump is not running')
-        return False
+        return not self.running
 
     def setSerialPort(self, serialPort):
         if self.serialManager.isOpen():
