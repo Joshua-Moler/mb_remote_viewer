@@ -59,15 +59,20 @@ class valveCom:
         return None
 
     def checkState(self):
+        print('called')
         if self.serialManager.isOpen():
+            print('entered')
             try:
                 self.serialManager.write(bytes('1', 'utf-8'))
                 time.sleep(0.1)
                 response = self.serialManager.readline()[:-2]
                 self.valveState = [ii for ii in response]
                 self.valveNum = len(self.valveState)
+                print('succeeded')
+                return self.valveState
 
             except PermissionError:
+                print('permission error')
                 return
 
     def setUpdateTime(self, time):

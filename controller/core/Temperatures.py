@@ -166,17 +166,23 @@ _lakeshore_com = lakeShoreCom()
 
 
 def init(sensors: dict, warmupHeaterResistance=None, sampleHeaterSettings=None):
+    print('temperatues init')
     _lakeshore_com.sensors = sensors
     _lakeshore_com.currentTemp = [0] * len(sensors)
     _lakeshore_com.currentRes = [0] * len(sensors)
     try:
+        print('st0')
         _lakeshore_com.ls = Model372(57600)
+        print('st1')
         _lakeshore_com.warmupHeaterOn = _lakeshore_com.ls.get_heater_output_range(
             1)
+        print('st2')
         _lakeshore_com.sampleHeaterSetRange = _lakeshore_com.ls.get_heater_output_range(
             0)
+        print('st3')
         _lakeshore_com.warmupHeaterOn = _lakeshore_com.ls.get_heater_output_range(
             2)
+        print('st4')
 
     except generic_instrument.InstrumentException:
         _lakeshore_com.ls = None
