@@ -5,7 +5,6 @@ import UnderCard from './UnderCard.js'
 export default class CardHolder extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.height)
         this.state = {
             doesDraw: this.doesDraw
         }
@@ -18,7 +17,6 @@ export default class CardHolder extends Component {
         let doesDraw = [...Array(this.props.cardNum).keys()]
         for (var ii in this.props.labels) {
             if (this.props.labels[ii] === this.props.omit) {
-                console.log(this.props.labels[ii])
                 doesDraw.splice(ii, 1)
             }
         }

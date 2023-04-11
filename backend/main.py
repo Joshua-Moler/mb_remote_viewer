@@ -131,6 +131,7 @@ async def token(request: Request, response: Response):
                           (hashedUsername, accessToken, tokenKey, tokenSecret))
     db_connection.commit()
 
+    print(accessToken)
     response.set_cookie(
         key='token', value=accessToken, samesite='none', httponly=True)
 
@@ -172,9 +173,11 @@ def getUserTokenSecret(token):
 
 def getAuthFromToken(cookie):
     if 'token' not in cookie:
+        print('not in cookie')
         raise HTTPException(401)
     token = cookie['token']
     if not validateToken(token):
+        print('not validated')
         raise HTTPException(401)
     tokenKey = getUserTokenKey(token)
     tokenSecret = getUserTokenSecret(token)

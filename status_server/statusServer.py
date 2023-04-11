@@ -272,7 +272,7 @@ def validateHeader(httpMethod, path, header, tls_ssl=False):
     return authDict['oauth_signature'] == validSignature
 
 
-data = OrderedDict({"Temperatures": {},
+data = OrderedDict({"Temperatures": {"PRP": 100, "STP": 200},
                     "Pressures": {},
                     "Flow": {},
                     "Valves": {},

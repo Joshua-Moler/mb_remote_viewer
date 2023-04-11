@@ -1,0 +1,4 @@
+{
+    "Data_Host": "http://localhost:5000",
+    "Backend_Host": "http://localhost:8000"
+}

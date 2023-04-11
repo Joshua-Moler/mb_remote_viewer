@@ -1,0 +1,43 @@
+{
+    "Temperature_Sensors": {
+        "PRP": 5,
+        "CFP": 7,
+        "STP": 4,
+        "ICP": 3,
+        "MXP_Low": "A",
+        "MXP_High": 8
+    },
+    "Heaters": {
+        "Sample": {
+            "Output_Number": 0,
+            "Resistance": 1
+        },
+        "Warm_UP": {
+            "Output_Number": 1,
+            "Resistance": 1
+        },
+        "Analog": {
+            "Output_Number": 2,
+            "Resistance": 1
+        }
+    },
+    "Timers": {
+        "Log_Timer": 60,
+        "Turbo_Com_Timer": 5,
+        "Valve_Update_Timer": 5,
+        "Flow_Readout_Timer": 3,
+        "Pressure_Readout_Timer": 1,
+        "Temperature_Readout_Timer": 5,
+        "Email_Timer": 3600,
+        "System_Config_Update_Timer": 60,
+        "Check_Port_Timer": 2,
+        "Dragging_Plot_Timer": 7200
+    },
+    "Email_List": [],
+    "Focus_Plot": [
+        "STP",
+        "ICP",
+        "MXP_Low",
+        "MXP_High"
+    ]
+}

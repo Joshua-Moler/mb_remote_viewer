@@ -1,0 +1,133 @@
+.fade {
+    /* background-color: rgba(52, 44, 63); */
+    background: none;
+    color: White;
+    border-color: White;
+    border-width: 0.1vh;
+    border-style: solid;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 0px;
+    flex: 1;
+    width: 100%;
+    margin-top: 0vh;
+    transition: margin-top 0.5s;
+    z-index: 2;
+    font-size: larger;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    text-justify: left;
+    gap: 1vh
+}
+
+.fade:hover {
+    cursor: default;
+}
+
+
+.undercard {
+    background-color: darkblue;
+    color: White;
+    border-color: White;
+    border-width: 0.2vh;
+    border-style: solid;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 0px;
+    flex: 1;
+    width: 100%;
+    margin-top: 0vh;
+    transition: margin-top 0.5s;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    text-justify: left;
+    gap: 0.5vh
+}
+
+.undercard:hover {
+    cursor: default;
+}
+
+.undermain {
+    position: absolute;
+    top: 10vh;
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    visibility: visible;
+    transition: width 0.25s;
+
+
+
+}
+
+.embedded {
+    width: 25%
+}
+
+.fade.moving {
+    margin-top: 40vh
+}
+
+.testing {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    height: 16vh;
+    width: 100vw;
+    top: 26vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.footerButton {
+    background: none;
+    border: none;
+    border-top: 0px;
+    border-bottom: 0px;
+    color: white;
+    height: 10vh;
+    width: 0;
+    flex: 1 1 0px;
+    text-align: center;
+    text-justify: center;
+    vertical-align: center;
+    text-decoration: none;
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.footerButton:hover {
+    cursor: default
+}
+
+.footerButton.uline {
+    font-weight: bold;
+}
+
+.LogsScreen {
+    background: linear-gradient(rgb(0, 0, 0, 0.2), rgb(0, 0, 0, 0)), linear-gradient(90deg, #1f3863, #111e34);
+    height: 100vh;
+    width: 100vw;
+}
+
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

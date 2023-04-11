@@ -28,6 +28,9 @@ from core.Temperatures import check_temperature, check_resistance
 from core.ComPorts import getDeviceMap, getTemperatureSensors
 
 
+import socketio
+
+
 def initDevices():
     deviceMap = getDeviceMap()
     print(deviceMap)
@@ -38,22 +41,19 @@ def initDevices():
             f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
     if "PM1" in deviceMap:
         print(
-<<<<<<< HEAD
             f'Initialized turbo com: {turbosInit(["PM1"], [deviceMap["PM1"]])}')
     if "PM2" in deviceMap:
         print(
             f'Initialized turbo com: {turbosInit(["PM2"], [deviceMap["PM2"]])}')
-=======
-            f'Initialized turbo com: {turbosInit(["PM1"], deviceMap["PM1"])}')
-    if "PM2" in deviceMap:
-        print(
-            f'Initialized turbo com: {turbosInit(["PM2"], deviceMap["PM2"])}')
->>>>>>> 07bfe38092ac67c76db215c562631e5f2b8e7b22
 
     temperaturesInit(getTemperatureSensors())
 
 
 app = FastAPI()
+
+sio = socketio.AsyncServer(
+    async_mode='asgi', cors_allowed_origins='http://localhost:3000')
+socket_app = socketio.ASGIApp(sio)
 
 
 @app.on_event("startup")
@@ -116,7 +116,7 @@ async def checkPressures():
 
 @app.get("/pressures/{p}")
 async def checkPressure(p):
-    return check_Pressure(p)
+    return check_pressure(p)
 
 
 @app.post("/turbos/start/{turbo}")
@@ -180,8 +180,24 @@ async def setAll(request: Request):
             turbo) if state else turbo_stop(turbo)
         print(f"SUCCESS? {turbo} : {success}")
     print({'valves': returnValves, 'pumps': returnPumps})
-    
+
     return success, {'valves': returnValves, 'pumps': returnPumps}
+
+
+app.mount('/', socket_app)
+
+
+@sio.on('connect')
+async def connect(sid, env):
+    print('connected to ', sid, 'with env: ', env)
+
+
+@app.on_event('startup')
+@repeat_every(seconds=5)
+async def emitValues():
+    await sio.emit('values', {"TEMPERATURES": {"t1": 'v2', 't2': 'v20', 't3': 'v19', 't4': 'v51'}, "PRESSURES": {
+        'p1': 'v3', 'p2': 'p10'}, "FLOWS": {}, "STATUS": {}, "VALVES": {}, "PUMPS": {}, "TURBOS": {}})
+
 
 if __name__ == '__main__':
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
