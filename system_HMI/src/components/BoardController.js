@@ -17,7 +17,7 @@ function BoardController(props) {
         "v10": { left: "69.75%", top: "76%", horizontal: false },
         "v11": { left: "26.7%", top: "77.25%", horizontal: true },
         "v12": { left: "23.2%", top: "62.5%", horizontal: false },
-        // "v14": { left: "18.25%", top: "82%", horizontal: true },
+        "v14": { left: "18.25%", top: "82%", horizontal: true },
         "v15": { left: "14.75%", top: "71.75%", horizontal: false },
         "v16": { left: "18.25%", top: "68.25%", horizontal: true },
         "v17": { left: "14.75%", top: "62.5%", horizontal: false },

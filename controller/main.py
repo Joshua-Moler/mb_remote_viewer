@@ -62,10 +62,11 @@ async def app_startup():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=['http://localhost:3000'],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
+    allow_methods=["GET", "POST", "HEAD", "OPTIONS"],
+    allow_headers=["Content-Type", "Access-Control-Allow-Origin",
+                   "Access-Control-Allow-Headers", "Authorization", "Set-Cookie"]
 )
 
 
@@ -140,6 +141,37 @@ async def turboQuery(turbo, request: Request):
     return turbo_query(turbo, data)
 
 
+@app.post("/system/set/all")
+async def systemSetAll(request: Request):
+    data = await request.json()
+    valves = {}
+    if 'VALVES' in data:
+        valves = data['VALVES']
+    pumps = {}
+    if 'PUMPS' in data:
+        pumps = data['PUMPS']
+    turbos = {}
+    if 'TURBOS' in data:
+        turbos = data['TURBOS']
+    returnValves = {}
+    success = False
+    for valve, state in valves.items():
+        success, returnValves[valve] = valve_open(
+            valve) if state else valve_close(valve)
+        print(f"SUCCESS? {valve} : {success}")
+    returnPumps = {}
+    for pump, state in pumps.items():
+        print(f"SUCCESS? {pump} : Not Implemented")
+    returnTurbos = {}
+    for turbo, state in turbos.items():
+        success, returnTurbos[turbo] = turbo_start(
+            turbo) if state else turbo_stop(turbo)
+        print(f"SUCCESS? {turbo} : {success}")
+    print({"VALVES": returnValves, "PUMPS": returnPumps, "TURBOS": returnTurbos})
+
+    return success, {'VALVES': returnValves, 'PUMPS': returnPumps, 'TURBOS': returnTurbos}
+
+
 @app.get("/lakeshore/temperatures/")
 async def checkTemperatures():
     return check_temperature()
@@ -186,17 +218,49 @@ async def setAll(request: Request):
 
 app.mount('/', socket_app)
 
+values = {"TEMPERATURES":
+          {"t1": 'v2', 't2': 'v20', 't3': 'v19', 't4': 'v51'},
+          "PRESSURES":
+          {'p1': 'v3', 'p2': 'p10'},
+          "FLOWS":
+          {"": "N/A"},
+          "STATUS":
+          {"": "MANUAL"},
+          "SETPOINT": {"": "N/A"},
+          "VALVES": {"v1": False,
+                     "v2": False,
+                     "v3": False,
+                     "v4": False,
+                     "v5": False,
+                     "v6": False},
+          "PUMPS":
+          {},
+          "TURBOS": {"PM1":
+                     {"STATE": False,
+                      "SPEED": 0,
+                      "CONVERTER": 25,
+                      "MOTOR": 25,
+                      "BEARING": 25,
+                      "SETPOINT": 1000},
+                     "PM2":
+                     {"STATE": False,
+                      "SPEED": 0,
+                      "CONVERTER": 25,
+                      "MOTOR": 25,
+                      "BEARING": 25,
+                      "SETPOINT": 1000}, }}
+
 
 @sio.on('connect')
 async def connect(sid, env):
     print('connected to ', sid, 'with env: ', env)
+    await sio.emit('values', values)
 
 
 @app.on_event('startup')
 @repeat_every(seconds=5)
 async def emitValues():
-    await sio.emit('values', {"TEMPERATURES": {"t1": 'v2', 't2': 'v20', 't3': 'v19', 't4': 'v51'}, "PRESSURES": {
-        'p1': 'v3', 'p2': 'p10'}, "FLOWS": {}, "STATUS": {}, "VALVES": {}, "PUMPS": {}, "TURBOS": {}})
+    await sio.emit('values', values)
 
 
 if __name__ == '__main__':

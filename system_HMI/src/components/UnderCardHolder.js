@@ -21,7 +21,7 @@ export default class CardHolder extends Component {
             }
         }
         return (
-            <div className="undermain" style={{
+            <div className={`undermain${this.props.embedded ? " embedded" : ""}`} style={{
                 "top": `${this.props.top}vh`,
                 "height": `${this.props.height > 0 ? this.props.height : 0}vh`
             }}>
@@ -32,7 +32,7 @@ export default class CardHolder extends Component {
                         key={ii}
                         onClick={(e) => this.props.onClick(e, this.props.id)}
                         visibility={this.props.visibility}
-                        z={this.props.active ? '1' : '0'}
+                        z={this.props.active ? '34' : '33'}
                         value={this.props.values[this.props.labels[ii]]}
                         units={this.props.units}
                     />)}

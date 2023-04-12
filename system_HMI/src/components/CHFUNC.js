@@ -21,14 +21,12 @@ function generateGradient(startColor, endColor, chunks) {
 }
 
 class CardData {
-    constructor(label = "", unit = "", activeLabel = "", name = "") {
+    constructor(label = "", unit = "", name = '') {
         this.label = label
         this.unit = unit
-        this.activeLabel = activeLabel
-        this.underCardVisibility = "hidden"
         this.underCardValues = {}
-        this.fade = false
         this.underGradient = ""
+        this.name = name
     }
 }
 
@@ -39,7 +37,7 @@ function getInitialCards(cardNum, values) {
         1: "TEMPERATURES",
         2: "PRESSURES",
         3: "SETPOINT",
-        4: "FLOW"
+        4: "FLOWS"
     }
 
     const cardLabels = {
@@ -79,7 +77,6 @@ function getInitialCards(cardNum, values) {
             )
         }
     }
-    console.log('got cards')
     return cards
 
 }
@@ -88,85 +85,115 @@ function getInitialCards(cardNum, values) {
 function CardHolder(props) {
 
     let cardNum = 7
-    let open = false
+    let [open, setOpen] = useState(false)
     let totalHeight = 100
-    let activeCard = 1
+    let [activeCard, setActiveCard] = useState(1)
+    let [structure, setStructure] = useState(Array(cardNum).fill({ fade: false, activeLabel: '', underCard: 'hidden' }))
 
     let cards = getInitialCards(cardNum, props.values)
+
+    let newStructure = JSON.parse(JSON.stringify(structure))
+    let changed = false
+    for (let card in cards) {
+        let oldActiveLabel = newStructure[card].activeLabel
+        let dataLength = Object.keys(cards[card].underCardValues).length
+        let newActiveLabel = dataLength && oldActiveLabel === '' ? Object.keys(props.values[cards[card].name])[dataLength - 1] : oldActiveLabel
+
+        if (oldActiveLabel != newActiveLabel) {
+            changed = true
+            newStructure[card].activeLabel = newActiveLabel
+        }
+
+    }
+    if (changed)
+        setStructure(newStructure)
 
     let gradientList = generateGradient([0, 0, 0, 0.2], [0, 0, 0, 0], cardNum)
 
     let onChildClick = (e) => {
-
         if (!open && Object.keys(cards[e].underCardValues).length > 1) {
-            let newCards = { ...cards }
+            let newStructure = JSON.parse(JSON.stringify(structure))
+
             let oldActive = activeCard
-            newCards[oldActive].underCardVisibility = 'hidden'
-            activeCard = e
-            newCards[e].fade = !newCards[e].fade
-            newCards[e].underCardVisibility = 'visible'
+            newStructure[oldActive].underCard = 'hidden'
+            setActiveCard(e)
+            newStructure[e].fade = !newStructure[e].fade
+            newStructure[e].underCard = 'visible'
+
+            setStructure(newStructure)
 
         }
         else {
-            let newCards = { ...cards }
-            newCards[activeCard].fade = false
+            let newStructure = JSON.parse(JSON.stringify(structure))
+            newStructure[activeCard].fade = false
+
+            setStructure(newStructure)
 
         }
         if (open || Object.keys(cards[e].underCardValues).length > 1) {
-            open = !open
+            setOpen(prevState => !prevState)
         }
-
 
     }
 
     let onUnderChildClick = (underCard, holder) => {
         if (open) {
-            cards[holder].activeLabel = underCard
-            cards[holder].fade = false
-            open = !open
+
+            let newStructure = JSON.parse(JSON.stringify(structure))
+
+            newStructure[holder].activeLabel = underCard
+            newStructure[holder].fade = false
+            setStructure(newStructure)
+            setOpen(prevState => !prevState)
         }
     }
 
     return (
 
-        <div className={`cardholder${props.embedded ? " embedded" : ""}`}>
+        < div className={`cardholder${props.embedded ? " embedded" : ""}`
+        }>
             {/* {open ? underCardHolders[activeUnderCardHolder] : ''} */}
-            {Object.keys(cards).map(
-                ii =>
-                    <UnderCardHolder
-                        key={`UC${ii}`}
+            {
+                Object.keys(cards).map(
+                    ii =>
+                        <UnderCardHolder
+                            key={`UC${ii}`}
+                            id={ii}
+                            cardNum={Object.keys(cards[ii].underCardValues).length}
+                            visibility={structure[ii].underCard}
+                            top={ii * totalHeight / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
+                            height={totalHeight * (Object.keys(cards[ii].underCardValues).length - 1) / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
+                            active={structure[ii].fade && open}
+                            labels={Object.keys(cards[ii].underCardValues)}
+                            onClick={onUnderChildClick}
+                            values={cards[ii].underCardValues}
+                            background={cards[ii].underGradient}
+                            units={cards[ii].unit}
+                            embedded={props.embedded}
+                            omit={structure[ii].activeLabel}
+
+
+                        />
+                )
+            }
+
+            {
+                Object.keys(cards).map(ii =>
+                    <Card
+                        background={`${gradientList[ii]},linear-gradient(90deg, #1f3863, #111e34)`}
+                        text={`${cards[ii].label}${structure[ii].activeLabel}`}
+                        key={ii}
+                        onClick={onChildClick}
                         id={ii}
-                        cardNum={Object.keys(cards[ii].underCardValues).length}
-                        visibility={cards[ii].underCardVisibility}
-                        top={ii * totalHeight / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
-                        height={totalHeight * (Object.keys(cards[ii].underCardValues).length - 1) / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
-                        active={cards[ii].fade}
-                        labels={Object.keys(cards[ii].underCardValues)}
-                        onClick={onUnderChildClick}
-                        values={cards[ii].underCardValues}
-                        background={cards[ii].underGradient}
+                        fade={structure[ii].fade && open}
+                        padding={totalHeight * (Object.keys(cards[ii].underCardValues).length - 1) / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
+                        value={cards[ii].underCardValues[structure[ii].activeLabel] ? cards[ii].underCardValues[structure[ii].activeLabel] : ""}
                         units={cards[ii].unit}
-                        embedded={props.embedded}
-                        omit={cards[ii].activeLabel}
-
-
                     />
-            )}
+                )
+            }
 
-            {Object.keys(cards).map(ii =>
-                <Card
-                    background={`${gradientList[ii]},linear-gradient(90deg, #1f3863, #111e34)`}
-                    text={`${cards[ii].label}${cards[ii].activeLabel}`}
-                    key={ii}
-                    onClick={onChildClick}
-                    id={ii}
-                    fade={cards[ii].fade}
-                    padding={totalHeight * (Object.keys(cards[ii].underCardValues).length - 1) / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
-                    value={cards[ii].underCardValues[cards[ii].activeLabel] ? cards[ii].underCardValues[cards[ii].activeLabel] : ""}
-                    units={cards[ii].unit}
-                />
-            )}
-        </div>
+        </div >
 
     )
 

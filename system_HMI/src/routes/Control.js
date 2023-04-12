@@ -12,111 +12,121 @@ import TurboPump from '../components/TurboPump';
 const backendHost = serverParameters['Backend_Host']
 
 
+function getState(newValues) {
+    let newState = {}
+
+    for (let valve in newValues['VALVES']) {
+        newState[valve] = newValues['VALVES'][valve]["STATE"] != undefined ? newValues['VALVES'][valve]["STATE"] : newValues['VALVES'][valve]
+    }
+    for (let pump in newValues['PUMPS']) {
+        newState[pump] = newValues['PUMPS'][pump]["STATE"] != undefined ? newValues['PUMPS'][pump]["STATE"] : newValues['PUMPS'][pump]
+    }
+    for (let turbo in newValues['TURBOS']) {
+        newState[turbo] = newValues['TURBOS'][turbo]["STATE"] != undefined ? newValues['TURBOS'][turbo]["STATE"] : newValues['TURBOS'][turbo]
+    }
+    return newState
+}
 
 function Control(props) {
 
-
-    let state = {
-
-        "v1": false,
-        "v2": false,
-        "v3": false,
-        "v4": false,
-        "v5": false,
-        "v6": false,
-        "v7": false,
-        "v8": false,
-        "v9": false,
-        "v10": false,
-        "v11": false,
-        "v12": false,
-        "v13": false,
-        "v14": false,
-        "v15": false,
-        "v16": false,
-        "v17": false,
-        "v18": false,
-        "v19": false,
-        "v20": false,
-        "v21": false,
-        "v22": false,
-        "v23": false,
-        "v24": false,
-        "PM1": false,
-        "PM2": false
-
-    }
-
-    const [status, setStatus] = useState(state)
-    const [userStatus, setUserStatus] = useState(state)
+    const status = getState(props.values)
+    const [valves, setValves] = useState(props.values['VALVES'])
+    const [pumps, setPumps] = useState(props.values['PUMPS'])
+    const [turbos, setTurbos] = useState(props.values['TURBOS'])
+    //console.log(props.values['VALVES'])
+    const [userStatus, setUserStatus] = useState(status)
     const [isChanging, setIsChanging] = useState(false)
-    const [waiting, setWaiting] = useState(true)
+    const [waiting, setWaiting] = useState(false)
     const [pumpManagerOn, setPumpManagerOn] = useState("")
-    const [opSuccess, setOpSuccess] = useState(true)
-
-    const updateStatus = () => {
 
 
-        fetch(`${backendHost}/status`, { method: 'GET', credentials: 'include' }).
-            then(data => data.json()).
-            then(json => {
-                console.log("STATE RECIEVED: ", json)
-                for (var key in status) {
-                    if (json[key] === undefined) {
-                        json[key] = status[key]
-                    }
-                }
-
-
-                setStatus(
-
-                    json
-
-                )
-
-                var isSameState = true
-
-                for (let key in json) {
-                    if (json[key] != userStatus[key]) {
-                        isSameState = false
-                    }
-                }
-
-                if (!isChanging || isSameState) {
-                    setUserStatus(json)
-                    setIsChanging(false)
-                }
-                setWaiting(false)
-            })
-
-
+    let isSameState = true
+    for (let device in status) {
+        if (status[device] != userStatus[device]) {
+            isSameState = false
+            break;
+        }
     }
+    if (isSameState && isChanging) {
+        setIsChanging(false)
+    }
+    else if (!isSameState && !isChanging) {
+        setUserStatus(status)
+    }
+
+
+
+    // const updateStatus = () => {
+
+
+    //     fetch(`${backendHost}/status`, { method: 'GET', credentials: 'include' }).
+    //         then(data => data.json()).
+    //         then(json => {
+    //             console.log("STATE RECIEVED: ", json)
+    //             for (var key in status) {
+    //                 if (json[key] === undefined) {
+    //                     json[key] = status[key]
+    //                 }
+    //             }
+
+
+    //             setStatus(
+
+    //                 json
+
+    //             )
+
+    //             var isSameState = true
+
+    //             for (let key in json) {
+    //                 if (json[key] != userStatus[key]) {
+    //                     isSameState = false
+    //                 }
+    //             }
+
+    //             if (!isChanging || isSameState) {
+    //                 setUserStatus(json)
+    //                 setIsChanging(false)
+    //             }
+    //             setWaiting(false)
+    //         })
+
+
+    // }
 
     const sendRequest = () => {
         setWaiting(true)
-        fetch(`${backendHost}/setstate`, { method: 'POST', body: JSON.stringify(userStatus), credentials: 'include' }).
+        fetch(`${backendHost}/system/set/all`, {
+            method: 'POST', body: JSON.stringify(userStatus), credentials: 'include', headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': "http://localhost:3000"
+            },
+        }).
             then(data => data.json()).
             then(json => {
+                console.log(json)
 
                 if (json[0] == false) {
                     console.log('failed')
-                    return
                 }
-                setOpSuccess(json[0])
-                let newState = json[1]
-                console.log(newState)
-                for (var key in status) {
-                    if (newState[key] === undefined) {
-                        newState[key] = status[key]
-                    }
-                }
+                let newValues = json[1]
+
+                setValves(newValues['VALVES'])
+                setPumps(newValues['PUMPS'])
+                setTurbos(newValues['TURBOS'])
+                // console.log(newState)
+                // for (var key in status) {
+                //     if (newState[key] === undefined) {
+                //         newState[key] = status[key]
+                //     }
+                // }
 
 
-                setStatus(
+                // setStatus(
 
-                    newState
+                //     newState
 
-                )
+                // )
 
                 // var isSameState = true
 
@@ -125,11 +135,24 @@ function Control(props) {
                 //         isSameState = false
                 //     }
                 // }
-                console.log(json)
+                //console.log(json)
 
+                let newState = {}
+
+                for (let valve in newValues['VALVES']) {
+                    newState[valve] = newValues['VALVES'][valve]["STATE"] != undefined ? newValues['VALVES'][valve]["STATE"] : newValues['VALVES'][valve]
+                }
+                for (let pump in newValues['PUMPS']) {
+                    newState[pump] = newValues['PUMPS'][pump]["STATE"] != undefined ? newValues['PUMPS'][pump]["STATE"] : newValues['PUMPS'][pump]
+                }
+                for (let turbo in newValues['TURBOS']) {
+                    newState[turbo] = newValues['TURBOS'][turbo]["STATE"] != undefined ? newValues['TURBOS'][turbo]["STATE"] : newValues['TURBOS'][turbo]
+                }
+                console.log(newState)
+
+                //setStatus(newState)
                 setUserStatus(newState)
                 setIsChanging(false)
-
                 setWaiting(false)
             })
 
@@ -151,49 +174,47 @@ function Control(props) {
 
     useEffect(() => {
         props.setPage();
-        setWaiting(true)
-        updateStatus(true)
+
 
 
 
     }, [])
 
-    useInterval(() => {
-        updateStatus()
-
-    }, 10000);
 
     const handleMapClick = (id) => {
-        var isSameState = checkSameState(id)
+        if (status[id] === undefined) {
+            return
+        }
+        var newUserState = JSON.parse(JSON.stringify(userStatus))
 
-        setUserStatus(prevState => ({ ...prevState, [id]: !prevState[id] }))
+        for (let device in status) {
+            if (newUserState[device] === undefined) {
+                newUserState[device] = status[device]
+            }
+        }
+
+        newUserState[id] = !newUserState[id]
+        let isSameState = true
+        for (let device in status) {
+            if (status[device] != newUserState[device]) {
+                isSameState = false
+                break;
+            }
+        }
+
+        setUserStatus(newUserState)
         setIsChanging(!isSameState)
     }
 
     const updating = () => {
         if (waiting) {
-            return (<div style={{ position: "absolute", top: "0", left: "25vw", width: "75vw", height: "100vh", background: "rgb(0,0,0,0.5)", zIndex: "30", overflow: "hidden", color: "white", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            return (<div style={{ position: "absolute", top: "0", left: "24vw", width: "76vw", height: "100vh", background: "rgb(0,0,0,0.5)", zIndex: "30", overflow: "hidden", color: "white", display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <img className='App-logo' src={logo}></img>
             </div>)
         }
         return ""
     }
 
-    const checkSameState = (id) => {
-
-        var isSameState = true
-        for (let key in status) {
-            if (status[key] != userStatus[key] && (id === undefined || key != id)) {
-                isSameState = false
-            }
-        }
-
-        if (status[id] === userStatus[id] && id !== undefined) {
-            isSameState = false
-        }
-
-        return isSameState
-    }
 
     const pumpMonitorManage = (id) => {
         setPumpManagerOn(id)
@@ -247,7 +268,6 @@ function Control(props) {
             </div>
         )
     }
-
     return (
         <div className="LogsScreen">
 

@@ -24,7 +24,7 @@ function App() {
 
   const [sioConnected, setSioConnected] = useState(socket.connected)
 
-  const [values, setValues] = useState({ "TEMPERATURES": {}, "PRESSURES": {}, "FLOWS": {}, "STATUS": {}, "VALVES": {}, "PUMPS": {}, "TURBOS": {} })
+  const [values, setValues] = useState({ "TEMPERATURES": {}, "PRESSURES": {}, "FLOWS": {}, "SETPOINT": {}, "STATUS": {}, "VALVES": {}, "PUMPS": {}, "TURBOS": {} })
 
   useEffect(() => {
 
@@ -37,7 +37,6 @@ function App() {
     }
 
     function onValues(newValues) {
-      console.log(newValues)
       setValues(prevState => {
         for (let value in prevState) {
           if (newValues[value] === undefined) {
@@ -46,6 +45,7 @@ function App() {
         }
         return newValues
       })
+      //console.log(values)
     }
 
     socket.on('connect', onConnect);
@@ -77,10 +77,9 @@ function App() {
             values={{ "VALVES": values["VALVES"], "PUMPS": values["PUMPS"], "TURBOS": values["TURBOS"] }} />} />
         </Routes>
         <CardHolder embedded={embedded}
-          values={{ "TEMPERATURES": values["TEMPERATURES"], "PRESSURES": values["PRESSURES"], "FLOWS": values["FLOWS"], "STATUS": values["STATUS"] }} />
+          values={{ "TEMPERATURES": values["TEMPERATURES"], "PRESSURES": values["PRESSURES"], "FLOWS": values["FLOWS"], "STATUS": values["STATUS"], "SETPOINT": values["SETPOINT"] }} />
         <Footer logout={logout} active={activePage} embedded={embedded} />
       </BrowserRouter>
-      {String(values["TEMPERATURES"]['t1'])}
     </div>
   );
 }
