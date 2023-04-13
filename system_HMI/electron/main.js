@@ -4,6 +4,8 @@ const createMainWindow = () => {
     let mainWindow = new BrowserWindow({
         width: electronScreen.getPrimaryDisplay().workArea.width,
         height: electronScreen.getPrimaryDisplay().workArea.height,
+        fullscreen: true,
+        frame: false,
         show: false,
         backgroundColor: 'white',
         webPreferences: {
