@@ -263,5 +263,41 @@ async def emitValues():
     await sio.emit('values', values)
 
 
+@app.on_event('startup')
+@repeat_every(seconds=5)
+async def pollTurbos():
+    pass
+
+
+@app.on_event('startup')
+@repeat_every(seconds=10)
+async def pollTemperatures():
+    pass
+
+
+@app.on_event('startup')
+@repeat_every(seconds=2)
+async def pollPressures():
+    pass
+
+
+@app.on_event('startup')
+@repeat_every(seconds=5)
+async def pollValves():
+    pass
+
+
+@app.on_event('startup')
+@repeat_every(seconds=2)
+async def pollFlows():
+    pass
+
+
+@app.on_event('startup')
+@repeat_every(seconds=60*10)
+async def logValues():
+    pass
+
+
 if __name__ == '__main__':
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
