@@ -25,7 +25,10 @@ from core.Turbos import turbo_start, turbo_stop, turbo_ping, turbo_query
 from core.Temperatures import init as temperaturesInit
 from core.Temperatures import check_temperature, check_resistance
 
-from core.ComPorts import getDeviceMap, getTemperatureSensors
+from core.ComPorts import getDeviceMap, getTemperatureSensors, getPressureSensors
+
+from core.Logs import init as logsInit
+from core.Logs import addSensorHeader
 
 
 import socketio
@@ -46,7 +49,13 @@ def initDevices():
         print(
             f'Initialized turbo com: {turbosInit(["PM2"], [deviceMap["PM2"]])}')
 
-    temperaturesInit(getTemperatureSensors())
+    temperatureSensors = getTemperatureSensors()
+    temperaturesInit(temperatureSensors)
+
+    logsInit(temperatureSensors.keys(), ["Temperature", "Resistance"])
+
+    pressureSensors = getPressureSensors()
+    addSensorHeader(pressureSensors.keys())
 
 
 app = FastAPI()

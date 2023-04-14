@@ -28,6 +28,15 @@ def getTemperatureSensors():
     with open("./settings.json") as configFile:
 
         configJSON = json.load(configFile)
-        sensors = configJSON["Sensors"]
+        sensors = configJSON["Sensors"]["Temperature"]
+
+        return sensors
+
+
+def getPressureSensors():
+    with open("./settings.json") as configFile:
+
+        configJSON = json.load(configFile)
+        sensors = configJSON["Sensors"]["Pressure"]
 
         return sensors
