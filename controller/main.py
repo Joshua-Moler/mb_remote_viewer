@@ -370,7 +370,7 @@ async def logValues():
     if not LOGGING:
         return
     thermSuccess, thermValues = checkLakeshoreValues()
-    if temperatureSuccess:
+    if thermSuccess:
         writeSensorHeader(sensors={
             sensor:
             {"Temperature": values.temperatures[sensor],
