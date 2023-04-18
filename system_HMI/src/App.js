@@ -13,7 +13,7 @@ import CardHolder from './components/CHFUNC';
 
 import { io } from "socket.io-client";
 
-const socket = io('ws://localhost:8080', { path: '/socket.io/', transports: ['websocket', 'polling'] });
+const socket = io('ws://localhost:8081', { path: '/socket.io/', transports: ['websocket', 'polling'] });
 
 
 

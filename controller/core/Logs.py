@@ -1,10 +1,48 @@
-from Utils.LogSystem import LogSystem
+from core.Utils.LogSystem import LogSystem
 
 
 BASEHEADERATTRIBUTES = ["Timestamp", "Datetime", "State Change",
                         "Valve State", "Turbo Speed (PM1)", "Turbo Speed (PM2)", "Events"]
 
 logger = LogSystem('C:/LOGS')
+loggerEvents = []
+currentRow = {}
+
+
+class UserEvent:
+    def __init__(self, user, eventType, eventValues, valveStateBefore, valveStateAfter, pumpStateBefore, pumpStateAfter):
+        self.user = user
+        self.eventType = eventType
+        self.eventValues = eventValues
+        self.valveStateBefore = valveStateBefore
+        self.valveStateAfter = valveStateAfter
+        self.pumpStateBefore = pumpStateBefore
+        self.pumpStateAfter = pumpStateAfter
+
+
+def doesLog(userEvent):
+    def decorator(function):
+        def wrapper(*args, **kwargs):
+            print(userEvent)
+            result = function(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
+
+
+def writeSensorHeader(sensors):
+    values = {}
+    for sensor in sensorList:
+        if type(sensors[sensor]) == dict:
+            for attribute in sensors[sensor]:
+                values[f'{sensor} ({attribute})'] = sensors[sensor][attribute]
+        else:
+            values[f'{sensor}'] = sensors[sensor]
+
+    for value in values:
+        currentRow[value] = values[value]
+
+    return currentRow
 
 
 def getHeaderFromSensors(sensorList, sensorAttributes=None, withBase=True):
@@ -53,4 +91,16 @@ def resumeLog(logName=None):
 
 
 def insertRow(**kwargs):
-    logger.insertRow(**kwargs)
+    eventHeader = ""
+    for event in loggerEvents:
+        eventHeader += event + ', '
+    if kwargs:
+        kwargs["Events"] = eventHeader.rstrip(', ')
+        logger.insertRow(**kwargs)
+    else:
+        values = dict({"Events": eventHeader.rstrip(', ')}, **currentRow)
+        logger.insertRow((values))
+
+
+def setLogEvent(event):
+    loggerEvents.append(event)

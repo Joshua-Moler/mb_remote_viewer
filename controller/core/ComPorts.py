@@ -40,3 +40,11 @@ def getPressureSensors():
         sensors = configJSON["Sensors"]["Pressure"]
 
         return sensors
+
+
+def getValves():
+    with open('./settings.json') as configFile:
+        configJSON = json.load(configFile)
+        valves = configJSON["Valves"]
+
+        return valves
