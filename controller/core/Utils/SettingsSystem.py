@@ -5,10 +5,10 @@ from enum import Enum
 
 
 class Permission(Enum):
-    PERMISSION_NONE = 0
-    PERMISSION_BASIC = 1
-    PERMISSION_ELEVATED = 2
-    PERMISSION_ADMIN = 3
+    IBP_NONE = 0
+    IBP_BASIC = 1
+    IBP_ELEVATED = 2
+    IBP_ADMIN = 3
 
 
 class SettingsPermissionException(Exception):
@@ -29,19 +29,19 @@ class SettingsTypeException:
 
 
 permissionMap = {
-    "PERMISSION_NONE": Permission.PERMISSION_NONE,
-    Permission.PERMISSION_NONE: Permission.PERMISSION_NONE,
-    "PERMISSION_BASIC": Permission.PERMISSION_BASIC,
-    Permission.PERMISSION_BASIC: Permission.PERMISSION_BASIC,
-    "PERMISSION_ELEVATED": Permission.PERMISSION_ELEVATED,
-    "PERMISSION_ADMIN": Permission.PERMISSION_ADMIN,
-    Permission.PERMISSION_ELEVATED: Permission.PERMISSION_ELEVATED,
+    "IBP_NONE": Permission.IBP_NONE,
+    Permission.IBP_NONE: Permission.IBP_NONE,
+    "IBP_BASIC": Permission.IBP_BASIC,
+    Permission.IBP_BASIC: Permission.IBP_BASIC,
+    "IBP_ELEVATED": Permission.IBP_ELEVATED,
+    "IBP_ADMIN": Permission.IBP_ADMIN,
+    Permission.IBP_ELEVATED: Permission.IBP_ELEVATED,
 }
 
 
 class Setting:
     def __init__(self, id, permissions, value):
-        permissions = permissionMap.get(permissions, Permission.PERMISSION_NONE)
+        permissions = permissionMap.get(permissions, Permission.IBP_NONE)
         self.id = id
         self.permissions = permissions
         self.value = value
@@ -112,7 +112,7 @@ class SettingsSystem:
             settingsJson.truncate()
 
     def setSetting(self, category, id, value, userPermission, save=True):
-        userPermission = permissionMap.get(userPermission, Permission.PERMISSION_NONE)
+        userPermission = permissionMap.get(userPermission, Permission.IBP_NONE)
         if category in self.settingsCategories:
             if not self.settingsCategories[category].setSetting(
                 id=id, value=value, userPermission=userPermission

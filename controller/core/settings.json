@@ -2,15 +2,15 @@
     "Remote": {
         "Does_Remote_Control_Manual": {
             "value": false,
-            "permissions": "PERMISSION_ADMIN"
+            "permissions": "IBP_ADMIN"
         },
         "Does_Remote_Control_Auto": {
             "value": false,
-            "permissions": "PERMISSION_ADMIN"
+            "permissions": "IBP_ADMIN"
         },
         "Does_Remote_Viewing": {
             "value": false,
-            "permissions": "PERMISSION_ADMIN"
+            "permissions": "IBP_ADMIN"
         }
     }
 }
