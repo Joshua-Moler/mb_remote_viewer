@@ -4,12 +4,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './routes/Home';
 import Login from './routes/Login';
 import Preferences from './routes/Preferences'
-import useToken from './useToken'
+import usePermissions from './usePermissions'
 import Logs from './routes/Logs'
 import Control from './routes/Control'
 import Footer from './components/Footer';
 import { useLocation } from 'react-router-dom';
 import CardHolder from './components/CHFUNC';
+
 
 import { io } from "socket.io-client";
 
@@ -18,7 +19,7 @@ const socket = io('ws://localhost:8081', { path: '/socket.io/', transports: ['we
 
 
 function App() {
-  const { token, setToken } = useToken();
+  const { permissions, setPermissions } = usePermissions();
   const [activePage, setActivePage] = useState("Home");
   const [embedded, setEmbedded] = useState(false)
 
@@ -64,9 +65,9 @@ function App() {
 
 
   // if (!token) {
-  //   return <Login setToken={setToken} />
+  //   return <Login setPermissions={setPermissions} />
   // }
-  const logout = () => { setToken(false); fetch("http://localhost:8000/logout", { method: 'POST', credentials: 'include' }) }
+  //const logout = () => { setPermissions(false); fetch("http://localhost:8000/logout", { method: 'POST', credentials: 'include' }) }
   return (
     <div className="wrapper">
       <BrowserRouter>

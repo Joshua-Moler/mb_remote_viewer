@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import BoardController from '../components/BoardController';
 import PumpMonitor from '../components/PumpMonitor';
 import serverParameters from '../data/serverParameters.json';
-import useInterval from '../useInterval'
 import logo from "../logo.svg"
 import TurboPump from '../components/TurboPump';
 

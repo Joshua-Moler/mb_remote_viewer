@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import useToken from '../useToken';
+import useToken from '../usePermissions';
 
 
 export default class Footer extends Component {
