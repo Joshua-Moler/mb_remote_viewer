@@ -10,6 +10,7 @@ import Control from './routes/Control'
 import Footer from './components/Footer';
 import { useLocation } from 'react-router-dom';
 import CardHolder from './components/CHFUNC';
+import Settings from './routes/Settings'
 
 
 import { io } from "socket.io-client";
@@ -76,10 +77,11 @@ function App() {
           <Route path="/Logs" element={<Logs setPage={() => { setActivePage("Logs"); setEmbedded(true) }} />} />
           <Route path="/Control" element={<Control setPage={() => { setActivePage("Control"); setEmbedded(true) }}
             values={{ "VALVES": values["VALVES"], "PUMPS": values["PUMPS"], "TURBOS": values["TURBOS"] }} />} />
+          <Route path="/Settings" element={<Settings setPage={() => { setActivePage("Settings"); setEmbedded(true) }} />} />
         </Routes>
         <CardHolder embedded={embedded}
           values={{ "TEMPERATURES": values["TEMPERATURES"], "PRESSURES": values["PRESSURES"], "FLOWS": values["FLOWS"], "STATUS": values["STATUS"], "SETPOINT": values["SETPOINT"] }} />
-        <Footer logout={logout} active={activePage} embedded={embedded} />
+        <Footer active={activePage} embedded={embedded} />
       </BrowserRouter>
     </div>
   );

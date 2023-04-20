@@ -1,0 +1,333 @@
+.userCard {
+
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 0px;
+
+    display: flex;
+
+    margin-top: 1.5%;
+    margin-bottom: 1.5vh;
+    min-width: 90%;
+    width: 0%;
+    height: 10vh;
+    min-height: 10vh;
+
+
+
+}
+
+
+.cardRight {
+    flex: 1;
+    display: flex;
+    margin-right: 5%;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+.userEdit {
+    /* Edit */
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #E5D6F5;
+
+}
+
+.cardLeft {
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.userName {
+
+    /* Kyle Thompson */
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 115%;
+    /* or 41px */
+    letter-spacing: 0.02em;
+
+    color: #F2EAFA;
+
+}
+
+.userEmail {
+
+    /* kyle@maybellquantum.com */
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+
+    color: #F2EAFA;
+
+    opacity: 0.75;
+
+}
+
+.ownerTag {
+
+    /* Owner */
+
+    width: 53px;
+    height: 27px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+
+    color: #F2EAFA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    top: 10%;
+    background: linear-gradient(100.58deg, #1E7B7B 0%, #2DB9B9 100%);
+    border-radius: 100px;
+}
+
+.adminTag {
+
+    /* Owner */
+
+    width: 53px;
+    height: 27px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+
+    color: #F2EAFA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    top: 10%;
+    background: linear-gradient(100.58deg, #0035AA 0%, #004FFF 100%);
+    border-radius: 100px;
+}
+
+.userTag {
+
+    /* Owner */
+
+    width: 53px;
+    height: 27px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+
+    color: #F2EAFA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    top: 10%;
+    background: linear-gradient(105.71deg, #6328A4 0%, #8946D2 100%);
+    border-radius: 100px;
+}
+
+.userCardHolder {
+    top: 30%;
+    max-height: 50vh;
+    left: 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 3vh;
+
+}
+
+*::-webkit-scrollbar {
+    width: 2px;
+}
+
+*::-webkit-scrollbar-track {
+    background: none;
+    border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(244, 232, 250, 0.01);
+    border-radius: 20px;
+    border: 3px solid rgba(244, 232, 250, 0.1);
+}
+
+.RightScreen {
+    position: absolute;
+    top: 0vh;
+    left: 25vw;
+    width: 75vw;
+    height: 100vh;
+    user-select: none;
+
+}
+
+.vLineCenter {
+    position: absolute;
+    left: 50%;
+    top: 20.2%;
+    width: 0%;
+    height: 75vh;
+    opacity: 0.1;
+    border: 1px solid #F2EAFA;
+}
+
+.hLineCenter {
+    position: absolute;
+    top: 20%;
+    left: 7%;
+    right: 7%;
+    height: 0;
+    opacity: 0.1;
+    border: 1px solid #F2EAFA;
+}
+
+.sectionLabel {
+    /* Accounts */
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 115%;
+    /* or 41px */
+    letter-spacing: 0.02em;
+
+    margin-top: 3vh;
+
+    color: #F2EAFA;
+
+
+}
+
+.rightSection {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    top: 20%;
+    right: 50%;
+    left: 7%;
+}
+
+.leftSection {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    top: 20%;
+    right: 0%;
+    left: 54.5%;
+}
+
+.boxed {
+    /* Frame 10 */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 36px;
+    gap: 10px;
+
+
+    border: 2px solid #E5D6F5;
+
+
+    /* + Add account */
+    width: 45%;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #E5D6F5;
+
+}
+
+.settingsDropdownLabel {
+    /* Pressure Unit */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    /* identical to box height, or 27px */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #F2EAFA;
+
+    opacity: 0.75;
+
+}
+
+.settingsDropdownTop {
+    /* Rectangle 46 */
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    margin-right: 15%;
+    background: linear-gradient(90.75deg, #002370 0%, #0050C7 100%);
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 115%;
+    /* or 41px */
+    letter-spacing: 0.02em;
+
+    color: #F2EAFA;
+}
+
+.settingsDropdownItem {
+    margin-left: 3%;
+    margin-right: 3%;
+    transition: rotate 0.25s;
+}
+
+.settingsDropdownBase {
+    margin-top: 3vh;
+}

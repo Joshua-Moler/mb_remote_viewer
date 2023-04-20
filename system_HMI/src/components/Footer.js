@@ -15,12 +15,8 @@ export default class Footer extends Component {
                 <Link className={`footerButton${this.props.active === 'Home' ? ' uline' : ''}`} to='/'>Home</Link>
                 <Link className={`footerButton${this.props.active === 'Logs' ? ' uline' : ''}`} to='/Logs'>Log</Link>
                 <Link className={`footerButton${this.props.active === 'Control' ? ' uline' : ''}`} to='/Control'>Control</Link>
-                <button
-                    className="footerButton"
-                    onClick={() => this.props.logout()}
-                >
-                    Logout
-                </button>
+                <Link className={`footerButton${this.props.active === 'Settings' ? ' uline' : ''}`} to='/Settings'>Settings</Link>
+
             </footer>
         )
     }
