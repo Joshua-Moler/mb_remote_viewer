@@ -29,12 +29,13 @@ export default class Card extends Component {
                 }}
 
                 className={`fade`}>
-                <div style={{ "marginLeft": "10%", "fontWeight": "bold" }}>
+                <div style={{ "marginLeft": "10%", "fontWeight": "600", fontSize: "32px" }}>
                     {`${this.props.value} ${this.props.units ? this.props.units : ""}`}
                 </div>
-                <div style={{ "fontSize": "small", "marginLeft": "10%" }}>
+                <div style={{ "fontSize": "18px", "fontWeight": "400", "marginLeft": "10%" }}>
                     {`${this.props.text}`}
                 </div>
+                {this.props.units && !this.props.fade ? <div style={{ position: "absolute", left: "5%", right: "5%", height: "2px", backgroundColor: "#F2EAFA", top: "0", opacity: 0.1, }} /> : ""}
             </div >
         )
     }

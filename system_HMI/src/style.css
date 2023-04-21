@@ -2,12 +2,12 @@
     /* background-color: rgba(52, 44, 63); */
     background: none;
     color: White;
-    border-color: White;
+    /* border-color: black;
     border-width: 0.1vh;
     border-style: solid;
     border-right: 0px;
     border-left: 0px;
-    border-bottom: 0px;
+    border-bottom: 0px; */
     flex: 1;
     width: 100%;
     margin-top: 0vh;
@@ -29,12 +29,12 @@
 
 .undercard {
     color: White;
-    border-color: White;
+    /* border-color: White;
     border-width: 0.2vh;
     border-style: solid;
     border-right: 0px;
     border-left: 0px;
-    border-bottom: 0px;
+    border-bottom: 0px; */
     flex: 1;
     width: 100%;
     margin-top: 0vh;
@@ -100,7 +100,7 @@
     text-justify: center;
     vertical-align: center;
     text-decoration: none;
-    font-size: medium;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -33,7 +33,7 @@ export default class CardHolder extends Component {
             }}>
                 {doesDraw.map(ii =>
                     <UnderCard
-                        background={this.props.background[0][ii]}
+                        background={this.props.background[0][position[ii]]}
                         text={this.props.labels[ii]}
                         key={position[ii]}
                         onClick={(e) => this.props.onClick(e, this.props.id)}

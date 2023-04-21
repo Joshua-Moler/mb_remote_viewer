@@ -20,7 +20,7 @@ function Settings(props) {
     const getActive = (id) => active === id || oldActive === id
 
     const getOpen = (id) => active === id
-
+    
     return (
         <div className="LogsScreen">
             <div className='RightScreen'>

@@ -31,12 +31,14 @@ export default class UnderCard extends Component {
 
 
                 className={`undercard`}>
-                <div style={{ "marginLeft": "5%", "paddingTop": '0.5%', 'fontWeight': 'bold' }}>
+                <div style={{ "marginLeft": "5%", "paddingTop": '0.5%', 'fontWeight': '600', 'fontSize': "28px" }}>
                     {`${this.props.value} ${this.props.units}`}
                 </div>
-                <div style={{ "marginLeft": "5%", "fontSize": "x-small" }}>
+                <div style={{ "marginLeft": "5%", "fontSize": "16px" }}>
                     {`${this.props.text}`}
                 </div>
+                {true ? <div style={{ position: "absolute", left: "0%", right: "5%", height: "2px", backgroundColor: "#F2EAFA", top: "0", opacity: 0.1, }} /> : ""}
+
             </div>
         )
     }

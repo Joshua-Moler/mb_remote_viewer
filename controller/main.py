@@ -25,7 +25,12 @@ from core.Turbos import turbo_start, turbo_stop, turbo_ping, turbo_query
 from core.Temperatures import init as temperaturesInit
 from core.Temperatures import check_temperature, check_resistance
 
-from core.ComPorts import getDeviceMap, getTemperatureSensors, getPressureSensors, getValves
+from core.ComPorts import (
+    getDeviceMap,
+    getTemperatureSensors,
+    getPressureSensors,
+    getValves,
+)
 
 from core.Logs import init as logsInit
 from core.Logs import addSensorHeader, startLog, resumeLog, insertRow, writeSensorHeader
@@ -47,12 +52,14 @@ class TurboInfo:
         self.setpoint = 0
 
     def valueDict(self):
-        return {"STATE": self.state,
-                "SPEED": self.speed,
-                "CONVERTER": self.converter,
-                "MOTOR": self.motor,
-                "BEARING": self.bearing,
-                "SETPOINT": self.setpoint}
+        return {
+            "STATE": self.state,
+            "SPEED": self.speed,
+            "CONVERTER": self.converter,
+            "MOTOR": self.motor,
+            "BEARING": self.bearing,
+            "SETPOINT": self.setpoint,
+        }
 
 
 class Values:
@@ -65,7 +72,7 @@ class Values:
         self.valves = {s: False for s in Valves}
         self.Pumps = {s: False for s in Pumps}
         self.Turbos = [TurboInfo(s) for s in Turbos]
-        self.status = "INACTIVE"
+        self.status = "Inactive"
         self.setpoint = 1
 
     def displayValues(self):
@@ -77,8 +84,7 @@ class Values:
             "SETPOINT": {"": self.setpoint},
             "VALVES": self.valves,
             "PUMPS": self.Pumps,
-            "TURBOS": {turbo.id: turbo.valueDict() for turbo in self.Turbos}
-
+            "TURBOS": {turbo.id: turbo.valueDict() for turbo in self.Turbos},
         }
 
 
@@ -88,14 +94,11 @@ def initDevices():
     if "Valves" in deviceMap:
         print(f'Initialized valve com: {valvesInit(deviceMap["Valves"])}')
     if "Pressures" in deviceMap:
-        print(
-            f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
+        print(f'Initialized pressure com: {pressuresInit(deviceMap["Pressures"])}')
     if "PM1" in deviceMap:
-        print(
-            f'Initialized turbo com: {turbosInit(["PM1"], [deviceMap["PM1"]])}')
+        print(f'Initialized turbo com: {turbosInit(["PM1"], [deviceMap["PM1"]])}')
     if "PM2" in deviceMap:
-        print(
-            f'Initialized turbo com: {turbosInit(["PM2"], [deviceMap["PM2"]])}')
+        print(f'Initialized turbo com: {turbosInit(["PM2"], [deviceMap["PM2"]])}')
 
     temperatureSensors = getTemperatureSensors()
     temperaturesInit(temperatureSensors)
@@ -110,7 +113,8 @@ def initDevices():
 app = FastAPI()
 
 sio = socketio.AsyncServer(
-    async_mode='asgi', cors_allowed_origins='http://localhost:3000')
+    async_mode="asgi", cors_allowed_origins="http://localhost:3000"
+)
 socket_app = socketio.ASGIApp(sio)
 
 LOGGING = False
@@ -121,19 +125,27 @@ values = Values()
 @app.on_event("startup")
 async def app_startup():
     initDevices()
-    values.fill(temperatureSensors=getTemperatureSensors(),
-                pressureSensors=getPressureSensors(),
-                Valves=getValves(),
-                Pumps={},
-                Turbos=["PM1", "PM2"])
+    values.fill(
+        temperatureSensors=getTemperatureSensors(),
+        pressureSensors=getPressureSensors(),
+        Valves=getValves(),
+        Pumps={},
+        Turbos=["PM1", "PM2"],
+    )
+
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:3000'],
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "HEAD", "OPTIONS"],
-    allow_headers=["Content-Type", "Access-Control-Allow-Origin",
-                   "Access-Control-Allow-Headers", "Authorization", "Set-Cookie"]
+    allow_headers=[
+        "Content-Type",
+        "Access-Control-Allow-Origin",
+        "Access-Control-Allow-Headers",
+        "Authorization",
+        "Set-Cookie",
+    ],
 )
 
 
@@ -144,7 +156,7 @@ async def root():
 
 @app.post("/login")
 async def token():
-    return {"token": 'test123'}
+    return {"token": "test123"}
 
 
 @app.post("/valves/toggle/{valve}")
@@ -213,31 +225,37 @@ async def systemSetAll(request: Request):
     data = await request.json()
     print(data)
     valves = {}
-    if 'VALVES' in data:
-        valves = data['VALVES']
+    if "VALVES" in data:
+        valves = data["VALVES"]
     pumps = {}
-    if 'PUMPS' in data:
-        pumps = data['PUMPS']
+    if "PUMPS" in data:
+        pumps = data["PUMPS"]
     turbos = {}
-    if 'TURBOS' in data:
-        turbos = data['TURBOS']
+    if "TURBOS" in data:
+        turbos = data["TURBOS"]
     returnValves = {}
     success = False
     for valve, state in valves.items():
-        success, returnValves[valve] = valve_open(
-            valve) if state else valve_close(valve)
+        success, returnValves[valve] = (
+            valve_open(valve) if state else valve_close(valve)
+        )
         print(f"SUCCESS? {valve} : {success}")
     returnPumps = {}
     for pump, state in pumps.items():
         print(f"SUCCESS? {pump} : Not Implemented")
     returnTurbos = {}
     for turbo, state in turbos.items():
-        success, returnTurbos[turbo] = turbo_start(
-            turbo) if state else turbo_stop(turbo)
+        success, returnTurbos[turbo] = (
+            turbo_start(turbo) if state else turbo_stop(turbo)
+        )
         print(f"SUCCESS? {turbo} : {success}")
     print({"VALVES": returnValves, "PUMPS": returnPumps, "TURBOS": returnTurbos})
 
-    return success, {'VALVES': returnValves, 'PUMPS': returnPumps, 'TURBOS': returnTurbos}
+    return success, {
+        "VALVES": returnValves,
+        "PUMPS": returnPumps,
+        "TURBOS": returnTurbos,
+    }
 
 
 @app.get("/lakeshore/temperatures/")
@@ -247,12 +265,13 @@ async def checkTemperatures():
 
 @app.get("/lakeshore/values")
 async def checkLakeshoreValues():
-
     temperatures = check_temperature()
     print(temperatures)
     resistance = check_resistance()
-    return (temperatures[0] and resistance[0],
-            {"Temperature": temperatures[1], "Resistance": resistance[1]})
+    return (
+        temperatures[0] and resistance[0],
+        {"Temperature": temperatures[1], "Resistance": resistance[1]},
+    )
 
 
 @app.get("/lakeshore/temperatures/{t}")
@@ -264,27 +283,27 @@ async def checkTemperature(t):
 async def setAll(request: Request):
     data = await request.json()
     valves = {}
-    if 'Valves' in data:
-        valves = data['Valves']
+    if "Valves" in data:
+        valves = data["Valves"]
     pumps = {}
-    if 'Pumps' in data:
-        pumps = data['Pumps']
+    if "Pumps" in data:
+        pumps = data["Pumps"]
     returnValves = {}
     for valve, state in valves.items():
-        success, returnValves[valve] = valve_open(
-            valve) if state else valve_close(valve)
+        success, returnValves[valve] = (
+            valve_open(valve) if state else valve_close(valve)
+        )
         print(f"SUCCESS? {valve} : {success}")
     returnPumps = {}
     for turbo, state in pumps.items():
-        success, returnPumps[turbo] = turbo_start(
-            turbo) if state else turbo_stop(turbo)
+        success, returnPumps[turbo] = turbo_start(turbo) if state else turbo_stop(turbo)
         print(f"SUCCESS? {turbo} : {success}")
-    print({'Valves': returnValves, 'Pumps': returnPumps})
+    print({"Valves": returnValves, "Pumps": returnPumps})
 
-    return success, {'Valves': returnValves, 'Pumps': returnPumps}
+    return success, {"Valves": returnValves, "Pumps": returnPumps}
 
 
-app.mount('/', socket_app)
+app.mount("/", socket_app)
 
 
 # values = {"TEMPERATURES":
@@ -322,61 +341,66 @@ app.mount('/', socket_app)
 #                       "SETPOINT": 1000}, }}
 
 
-@sio.on('connect')
+@sio.on("connect")
 async def connect(sid, env):
-    print('connected to ', sid, 'with env: ', env)
-    await sio.emit('values', values.displayValues())
+    print("connected to ", sid, "with env: ", env)
+    await sio.emit("values", values.displayValues())
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 @repeat_every(seconds=5)
 async def emitValues():
-    await sio.emit('values', values.displayValues())
+    await sio.emit("values", values.displayValues())
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 @repeat_every(seconds=5)
 async def pollTurbos():
     pass
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 @repeat_every(seconds=10)
 async def pollTemperatures():
     pass
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 @repeat_every(seconds=2)
 async def pollPressures():
     pass
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 @repeat_every(seconds=5)
 async def pollValves():
     pass
 
 
-@app.on_event('startup')
+@app.on_event("startup")
 @repeat_every(seconds=2)
 async def pollFlows():
     pass
 
 
-@app.on_event('startup')
-@repeat_every(seconds=60*10)
+@app.on_event("startup")
+@repeat_every(seconds=60 * 10)
 async def logValues():
     if not LOGGING:
         return
     thermSuccess, thermValues = checkLakeshoreValues()
     if thermSuccess:
-        writeSensorHeader(sensors={
-            sensor:
-            {"Temperature": values.temperatures[sensor],
-             "Resistance": values.resistances[sensor]} for sensor in values.temperatureSensors})
+        writeSensorHeader(
+            sensors={
+                sensor: {
+                    "Temperature": values.temperatures[sensor],
+                    "Resistance": values.resistances[sensor],
+                }
+                for sensor in values.temperatureSensors
+            }
+        )
     insertRow()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8081, reload=True)
