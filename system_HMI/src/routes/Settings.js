@@ -30,8 +30,6 @@ function Settings(props) {
                     </div>
                     <UserCardHolder>
                         <UserCard name="Kyle Thompson" email="kyle@maybellquantum.com" role="Owner" />
-                        <UserCard name="Eveline Wells" email="eveline@maybellquantum.com" role="Admin" />
-                        <UserCard name="Xavier Reece-Wilson" email="xavier@maybellquantum.com" role="Admin" />
                         <UserCard name="Michelle Liu" email="michelle@maybellquantum.com" role="User" />
                     </UserCardHolder>
                     <div className='sectionLabel'>
@@ -53,10 +51,10 @@ function Settings(props) {
                 </div>
                 <div className='vLineCenter' />
                 <div className='hLineCenter' />
-                <div className='BackgroundBlur' style={{
+                {/* <div className='BackgroundBlur' style={{
                     opacity: active === '' ? 0 : 1,
                     pointerEvents: active === '' ? 'none' : 'auto'
-                }} onClick={() => { setActive('') }}></div>
+                }} onClick={() => { setActive('') }}></div> */}
             </div>
         </div >
     )

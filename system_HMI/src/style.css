@@ -28,7 +28,6 @@
 
 
 .undercard {
-    background-color: darkblue;
     color: White;
     border-color: White;
     border-width: 0.2vh;
@@ -62,9 +61,7 @@
     justify-content: center;
     flex-direction: column;
     visibility: visible;
-    transition: width 0.25s;
-
-
+    transition: max-height 0.5s, width 0.25s, top 0.5s;
 
 }
 
@@ -120,7 +117,7 @@
 }
 
 .LogsScreen {
-    background: linear-gradient(rgb(0, 0, 0, 0.2), rgb(0, 0, 0, 0)), linear-gradient(90deg, #1f3863, #111e34);
+    background: linear-gradient(132.46deg, #11071D 0%, #002066 130.35%);
     height: 100vh;
     width: 100vw;
     overflow: hidden;

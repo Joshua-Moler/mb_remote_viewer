@@ -16,6 +16,7 @@ export default class Card extends Component {
                     "marginTop": `${fade ? this.props.padding : 0}vh`,
                     "borderWidth": `${this.displayText ? 0.1 : 0}vh`,
                     "background": this.props.background,
+                    "backdropFilter": "blur(20px)",
                     "zIndex": 35
 
                 }

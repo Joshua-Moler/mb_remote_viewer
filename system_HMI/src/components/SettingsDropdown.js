@@ -5,14 +5,14 @@ function SettingsDropdown(props) {
 
         if (props.open)
             return (
-                <div style={{ position: 'absolute', width: "100%", overflow: "hidden", transition: "max-height 0.25s", maxHeight: '200px' }}>
-                    <div className="settingsDropdownTop" style={{ position: 'relative', transition: "transform 0.25s", transform: "translateY(0px)", float: "inline-start" }}>
+                <div style={{ position: 'relative', width: "100%", overflow: "hidden", transition: "max-height 0.25s", maxHeight: '200px' }}>
+                    <div className="settingsDropdownTop" style={{ transition: "transform 0.25s", transform: "translateY(-0px)", float: "inline-start" }}>
                         <div className="settingsDropdownItem">
                             hello
                         </div>
 
                     </div>
-                    <div className="settingsDropdownTop" style={{ transition: "transform 0.25s", transform: "translateY(0px)" }}>
+                    <div className="settingsDropdownTop" style={{ transition: "transform 0.25s", transform: "translateY(-0px)" }}>
                         <div className="settingsDropdownItem">
                             hello
                         </div>

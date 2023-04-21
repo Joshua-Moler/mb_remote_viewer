@@ -73,7 +73,7 @@ function getInitialCards(cardNum, values) {
                 cards[card].activeLabel = dataLength ? Object.keys(values[cards[card].name])[dataLength - 1] : ""
 
             cards[card].underGradient = [...Array(Object.keys(cards[card].underCardValues).length).keys()].map(
-                (ii) => Object.keys(cards[card].underCardValues).length ? generateGradient([255, 255, 255, 0.0], [255, 255, 255, 0.0], Object.keys(cards[card].underCardValues).length) : ""
+                (ii) => Object.keys(cards[card].underCardValues).length ? generateGradient([255, 255, 255, 0.0], [255, 255, 255, 0.05], Object.keys(cards[card].underCardValues).length) : ""
             )
         }
     }
@@ -108,7 +108,7 @@ function CardHolder(props) {
     if (changed)
         setStructure(newStructure)
 
-    let gradientList = generateGradient([0, 0, 0, 0.2], [0, 0, 0, 0], cardNum)
+    let gradientList = generateGradient([255, 255, 255, 0.15], [255, 255, 255, 0.05], cardNum)
 
     let onChildClick = (e) => {
         if (!open && Object.keys(cards[e].underCardValues).length > 1) {
@@ -151,7 +151,7 @@ function CardHolder(props) {
     return (
 
         < div className={`cardholder${props.embedded ? " embedded" : ""}`
-        }>
+        } style={{ background: "none" }}>
             {/* {open ? underCardHolders[activeUnderCardHolder] : ''} */}
             {
                 Object.keys(cards).map(
@@ -161,6 +161,7 @@ function CardHolder(props) {
                             id={ii}
                             cardNum={Object.keys(cards[ii].underCardValues).length}
                             visibility={structure[ii].underCard}
+                            oldTop={ii * totalHeight / Object.keys(cards).length}
                             top={ii * totalHeight / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
                             height={totalHeight * (Object.keys(cards[ii].underCardValues).length - 1) / (Object.keys(cards).length + Object.keys(cards[ii].underCardValues).length - 1)}
                             active={structure[ii].fade && open}
@@ -180,7 +181,7 @@ function CardHolder(props) {
             {
                 Object.keys(cards).map(ii =>
                     <Card
-                        background={`${gradientList[ii]},linear-gradient(90deg, #1f3863, #111e34)`}
+                        background={`${gradientList[ii]}`}//,linear-gradient(90deg, #1f3863, #111e34)`}
                         text={`${cards[ii].label}${structure[ii].activeLabel}`}
                         key={ii}
                         onClick={onChildClick}
